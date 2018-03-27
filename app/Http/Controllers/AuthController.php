@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 //use App\Http\Controllers\BaseController as BaseController;
 
-use App\User;
+use App\Models\User;
 
 use App\Http\Requests;
 use Tymon\JWTAuth\Exceptions\JWTException;

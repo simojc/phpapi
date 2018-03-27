@@ -2,24 +2,24 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
-use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\session;
+use Illuminate\Foundation\Support\Providers\sessionServiceProvider as ServiceProvider;
 
-class EventServiceProvider extends ServiceProvider
+class sessionServiceProvider extends ServiceProvider
 {
     /**
-     * The event listener mappings for the application.
+     * The session listener mappings for the application.
      *
      * @var array
      */
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        'App\sessions\session' => [
+            'App\Listeners\sessionListener',
         ],
     ];
 
     /**
-     * Register any events for your application.
+     * Register any sessions for your application.
      *
      * @return void
      */

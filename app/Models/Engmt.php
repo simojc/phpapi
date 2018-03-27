@@ -1,0 +1,27 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Engmt extends Model
+{
+    //
+		   protected $fillable = [
+			'nom', 'descr', 'periodicite',
+			'periode', 'statut', 'mont_unit',
+			'totalper', 
+		];
+
+		public function groupe() 
+		{
+			// return $this->belongsTo('App\Models\Groupe’); 
+			  return $this->belongsTo(Groupe::class); 
+		};
+
+		public function engmtpers()
+ 		{ 
+			return $this->hasMany('App\Models\Engmtpers'); 
+		}
+
+}

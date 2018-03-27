@@ -15,6 +15,23 @@ class CreateEngmtpersTable extends Migration
     {
         Schema::create('engmtpers', function (Blueprint $table) {
             $table->increments('id');
+
+			$table->integer('engmt_id');		
+			$table->integer('pers_id');		  // (fk vers table personne; contrainte: la personne doit être de type membre)
+			$table->integer('exercice');		
+			$table->integer('mont');			
+			$table->string('statut');	
+			$table->string('dtchgst');
+			$table->string('message');			
+			$table->dateTime('dt_ech');	
+			$table->primary('id');
+			$table->foreign('engmt_id')
+			  ->references('id')->on('engmts')
+			  ->onDelete('cascade');
+			$table->foreign('pers_id')
+			 ->references('id')->on('pers')
+			 ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
