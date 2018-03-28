@@ -14,17 +14,16 @@ class CreateEventsTable extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->increments('id');
-
-			$table->string('name');	
-			$table->dateTime('date');	
-			$table->string('time');	
-			$table->decimal('price');	
-			$table->string('imageUrl');	
-			$table->integer('location_id'); 
+      $table->increments('id');
+			$table->string('name');
+			$table->dateTime('date');
+			$table->string('time');
+			$table->decimal('price');
+			$table->string('imageUrl');
+			$table->integer('location_id');
 			$table->string('onlineUrl');
 
-			$table->primary('id');
+			//$table->primary('id');
 			$table->foreign('location_id')
 				->references('id')->on('locations')
 				->onDelete('cascade');
