@@ -30,7 +30,7 @@ class CreatePersTable extends Migration
 			$table->string('titre_adh')->nullable();	 	// 	(Le titre d'adhésion ou responsabilité au sein du groupe: membre régulier, président, sécrétaire, commissaire aucompte etc...)
 			
 			// contraintes PK et FK
-			$table->primary('id');
+			//$table->primary('id');
 			$table->foreign('user_id')
 			  ->references('id')->on('users')
 			  ->onDelete('cascade');

@@ -25,7 +25,7 @@ class CreateEngmtsTable extends Migration
 			$table->integer('mont_unit');		
 			$table->integer('totalper');   /// solde période
 			//contraintes
-			$table->primary('id');
+			//$table->primary('id');
 			$table->foreign('groupe_id')
 			  ->references('id')->on('groupes')
 			  ->onDelete('cascade');

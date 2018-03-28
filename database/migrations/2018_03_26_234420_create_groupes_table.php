@@ -31,7 +31,7 @@ class CreateGroupesTable extends Migration
 			$table->unique('nom');
 
 			//contrainte PK
-			$table->primary('id');
+			//$table->primary('id');
 
 			$table->foreign('location_id')
 				->references('id')->on('locations')

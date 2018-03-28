@@ -25,7 +25,7 @@ class CreateTontsTable extends Migration
 			$table->string('cot_dern');		  /// Ce champ est encore à analyser
 
 			// Contraintes
-			$table->primary('id');
+			//$table->primary('id');
 			$table->foreign('groupe_id')
 			  ->references('id')->on('groupes')
 			  ->onDelete('cascade');

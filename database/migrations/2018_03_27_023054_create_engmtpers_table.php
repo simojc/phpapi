@@ -24,7 +24,7 @@ class CreateEngmtpersTable extends Migration
 			$table->string('dtchgst');
 			$table->string('message');			
 			$table->dateTime('dt_ech');	
-			$table->primary('id');
+			//$table->primary('id');
 			$table->foreign('engmt_id')
 			  ->references('id')->on('engmts')
 			  ->onDelete('cascade');

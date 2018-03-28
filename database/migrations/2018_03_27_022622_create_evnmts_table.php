@@ -21,7 +21,7 @@ class CreateEvnmtsTable extends Migration
 			$table->dateTime('date');		
 			$table->dateTime('hrdeb');		
 			$table->dateTime('hrfin');		
-			$table->string('status');			
+			$table->string('statut');			
 			$table->string('descr');			// (longue description , famille acueil, tout autres info pertinantes)
 			$table->text('contenu');
 			$table->integer('location_id'); 				  /// Adresse du groupe	  FK vers location
@@ -32,7 +32,7 @@ class CreateEvnmtsTable extends Migration
 			$table->boolean('affich');		 	//(affiché cet evnmt dans la page d'acceuile? Oui/Non)
 
 				//Contraintes
-			$table->primary('id');
+			//$table->primary('id');
 
 			$table->foreign('groupe_id')
 			  ->references('id')->on('groupes')

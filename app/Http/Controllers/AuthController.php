@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 //use App\Http\Controllers\BaseController as BaseController;
 
-use App\Models\User;
+use App\User;
 
 use App\Http\Requests;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -24,12 +24,17 @@ class AuthController extends Controller
                 'name' => 'required|string|unique:users',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:6|max:10',
+				'groupe_id' => 'required'
                ]);
 
             $user = new User;
             $user->email = $request->email;
             $user->name = $request->name;
+		
             $user->password = bcrypt($request->password);
+
+			// renseigner le groupe avec une variable globale dans le frontend Angular
+			$user->groupe_id = $request->groupe_id;   
 
           if ($user->save()) {
                 $user->signin = [
@@ -51,7 +56,6 @@ class AuthController extends Controller
 
           return response()->json($response, 404);
       }
-
 
     //  login method: it will handle the user logins
       public function login(Request $request)
@@ -106,6 +110,40 @@ class AuthController extends Controller
          'status' => 'success'
         ]);
     }
+
+
+	/**
+		 * Update the specified resource in storage.
+		 *
+		 * @param  \Illuminate\Http\Request  $request
+		 * @param  int  $id
+		 * @return \Illuminate\Http\Response
+		 */
+		//public function update(Request $request, $id)
+		 public function update(Request $request, User $util)
+		{
+			 if (! $user = JWTAuth::parseToken()->authenticate()) {
+				   return response()->json(['msg' => 'User not found'], 404);
+			   }
+
+			$input = $request->all();
+
+			/*
+				$validator = Validator::make($input, [
+				'admin'=> 'admin'
+				]);
+			*/
+
+			if($validator->fails()){
+				return $this->sendError('Validation Error.', $validator->errors());
+			}
+
+			  $util->admin = $input['admin'];            
+				
+			 $util->save();
+
+			return $this->sendResponse($util->toArray(), 'User mis à jour avec succès.');
+		}
 
 
 }

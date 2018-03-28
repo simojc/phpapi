@@ -25,7 +25,7 @@ class CreateRpnpersTable extends Migration
 			$table->dateTime('dtmajdpt');
 
 			//Contraintes
-			$table->primary('id');
+			//$table->primary('id');
 			$table->foreign('groupe_id')
 			  ->references('id')->on('groupes')
 			  ->onDelete('cascade');

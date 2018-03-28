@@ -11,7 +11,7 @@ class Evnmt extends Model
     'date',
     'hrdeb',
     'hrfin',
-    'status',    
+    'statut',    
     'descr',  
 	'rapport',
 	'resp1',

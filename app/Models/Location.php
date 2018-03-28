@@ -12,9 +12,9 @@ class Location extends Model
 			'country',		 
 			]	
 
-		public function session()
+		public function event()
 		{
-			return $this->hasOne('App\Models\session');
+			return $this->hasOne('App\Models\Event');
 		}
 
 		public function evmnt()

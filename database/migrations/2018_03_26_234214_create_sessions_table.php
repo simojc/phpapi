@@ -21,15 +21,13 @@ class CreateSessionsTable extends Migration
 			$table->decimal('duration') ;
 			$table->string('level');	
 			$table->string('abstract');
-			$table->integer('session_id');
+			$table->integer('event_id'); 
 
-            $table->timestamps();
-
-			 $table->primary('id');			 
+            $table->timestamps();		 
 				
-			$table->foreign('session_id')
-				->references('id')->on('sessions')
-				->onDelete('cascade');		
+			$table->foreign('event_id')
+			->references('id')->on('events')
+			->onDelete('cascade');			
         });
     }
 

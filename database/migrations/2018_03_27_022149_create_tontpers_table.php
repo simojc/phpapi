@@ -25,7 +25,7 @@ class CreateTontpersTable extends Migration
 			$table->dateTime('dt_statut');	
 			
 			//Contraintes
-			$table->primary('id');
+		//	$table->primary('id');
 
 			$table->foreign('tont_id')
 				  ->references('id')->on('tonts')

@@ -3,6 +3,6 @@ routes.php
 schedule-*
 compiled.php
 services.json
-sessions.scanned.php
+events.scanned.php
 routes.scanned.php
 down

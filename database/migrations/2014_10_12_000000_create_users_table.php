@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
 			$table->boolean('admin')->default('false');		
 			$table->integer('groupe_id')->nullable(false);
 			// définition des contraintes
-			$table->primary('id');
+			
 			$table->foreign('groupe_id')
 				->references('id')->on('groupes)
 				->onDelete('cascade');				
