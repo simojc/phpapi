@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Evnmt;
+use App\Evnmt;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class EvnmtController extends Controller
+class EvnmtController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class EvnmtController extends Controller
 		 }
 			$evnmts = Evnmt::all();
 
-			return $this->sendResponse($evnmts->toArray(), 'evnmts extraits avec succ�s.');
+			return $this->sendResponse($evnmts->toArray(), 'evnmts extraits avec succes.');
 		}
 
 		/**
@@ -55,7 +55,7 @@ class EvnmtController extends Controller
 
 			$evnmts = Evnmt::create($input);
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts cr�� avec succ�s.');
+			return $this->sendResponse($evnmts->toArray(), 'Evnmts cree avec succes.');
 		}
 
 		/**
@@ -73,10 +73,10 @@ class EvnmtController extends Controller
 			$evnmts = Evnmts::find($id);
 
 			if (is_null($evnmts)) {
-				return $this->sendError('evnmts non trouv�.');
+				return $this->sendError('evnmts non trouve.');
 			}
 
-			return $this->sendResponse($evnmts->toArray(), 'evnmts r�cup�r avec succ�s .');
+			return $this->sendResponse($evnmts->toArray(), 'evnmts recuper avec succes .');
 		}
 
 		/**
@@ -128,7 +128,7 @@ class EvnmtController extends Controller
 
 			 $evnmts->save();
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts mis � jour avec succ�s.');
+			return $this->sendResponse($evnmts->toArray(), 'Evnmts mis a jour avec succes.');
 		}
 
 		/**
@@ -145,6 +145,6 @@ class EvnmtController extends Controller
 
 			$evnmts->delete();
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts supprim� avec succ�s.');
+			return $this->sendResponse($evnmts->toArray(), 'Evnmts supprime avec succes.');
 		}
 }

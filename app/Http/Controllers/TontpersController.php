@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Tontpers;
+use App\Tontpers;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class TontpersController extends Controller
+class TontpersController extends BaseController
 {
 		/**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class TontpersController extends Controller
 		 }
 			$tontperss = Tontpers::all();
 
-			return $this->sendResponse($tontperss->toArray(), 'Tontperss extraits avec succ�s.');
+			return $this->sendResponse($tontperss->toArray(), 'Tontperss extraits avec succes.');
 		}
 
 		/**
@@ -55,7 +55,7 @@ class TontpersController extends Controller
 
 			$tontpers = Tontpers::create($input);
 
-			return $this->sendResponse($tontpers->toArray(), 'Tontpers cr�� avec succ�s.');
+			return $this->sendResponse($tontpers->toArray(), 'Tontpers cree avec succes.');
 		}
 
 		/**
@@ -73,10 +73,10 @@ class TontpersController extends Controller
 			$tontpers = Tontpers::find($id);
 
 			if (is_null($tontpers)) {
-				return $this->sendError('tontpers non trouv�.');
+				return $this->sendError('tontpers non trouve.');
 			}
 
-			return $this->sendResponse($tontpers->toArray(), 'tontpers r�cup�r avec succ�s .');
+			return $this->sendResponse($tontpers->toArray(), 'tontpers recuper avec succes .');
 		}
 
 		/**
@@ -119,7 +119,7 @@ class TontpersController extends Controller
 
 			$tontpers->save();
 
-			return $this->sendResponse($tontpers->toArray(), 'Tontpers mis � jour avec succ�s.');
+			return $this->sendResponse($tontpers->toArray(), 'Tontpers mis a jour avec succes.');
 		}
 
 		/**
@@ -136,6 +136,6 @@ class TontpersController extends Controller
 
 			$tontpers->delete();
 
-			return $this->sendResponse($tontpers->toArray(), 'Tontpers supprim� avec succ�s.');
+			return $this->sendResponse($tontpers->toArray(), 'Tontpers supprime avec succes.');
 		}
 }

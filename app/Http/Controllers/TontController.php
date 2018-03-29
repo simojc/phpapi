@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Tont;
+use App\Tont;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class TontController extends Controller
+class TontController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class TontController extends Controller
 		 }
 			$tonts = Tont::all();
 
-			return $this->sendResponse($tonts->toArray(), 'Tonts extraits avec succ�s.');
+			return $this->sendResponse($tonts->toArray(), 'Tonts extraits avec succes.');
 		}
 
 		/**
@@ -54,7 +54,7 @@ class TontController extends Controller
 
 			$tont = Tont::create($input);
 
-			return $this->sendResponse($tont->toArray(), 'Tont cr�� avec succ�s.');
+			return $this->sendResponse($tont->toArray(), 'Tont cree avec succes.');
 		}
 
 		/**
@@ -72,10 +72,10 @@ class TontController extends Controller
 			$tont = Tont::find($id);
 
 			if (is_null($tont)) {
-				return $this->sendError('tont non trouv�.');
+				return $this->sendError('tont non trouve.');
 			}
 
-			return $this->sendResponse($tont->toArray(), 'tont r�cup�r avec succ�s .');
+			return $this->sendResponse($tont->toArray(), 'tont recuper avec succes .');
 		}
 
 		/**
@@ -117,7 +117,7 @@ class TontController extends Controller
 
 			 $tont->save();
 
-			return $this->sendResponse($tont->toArray(), 'Tont mis � jour avec succ�s.');
+			return $this->sendResponse($tont->toArray(), 'Tont mis a jour avec succes.');
 		}
 
 		/**

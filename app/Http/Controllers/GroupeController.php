@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Groupe;
+use App\Groupe;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class GroupeController extends Controller
+class GroupeController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class GroupeController extends Controller
 		 }
 			$groupes = Groupe::all();
 
-			return $this->sendResponse($groupes->toArray(), 'Groupes extraits avec succ�s.');
+			return $this->sendResponse($groupes->toArray(), 'Groupes extraits avec succes.');
 		}
 
 		/**
@@ -57,7 +57,7 @@ class GroupeController extends Controller
 
 			$groupe = Groupe::create($input);
 
-			return $this->sendResponse($groupe->toArray(), 'Groupe cr�� avec succ�s.');
+			return $this->sendResponse($groupe->toArray(), 'Groupe cree avec succes.');
 		}
 
 		/**
@@ -75,10 +75,10 @@ class GroupeController extends Controller
 			$groupe = Groupe::find($id);
 
 			if (is_null($groupe)) {
-				return $this->sendError('groupe non trouv�.');
+				return $this->sendError('groupe non trouve.');
 			}
 
-			return $this->sendResponse($groupe->toArray(), 'groupe r�cup�r avec succ�s .');
+			return $this->sendResponse($groupe->toArray(), 'groupe recuper avec succes .');
 		}
 
 		/**
@@ -129,7 +129,7 @@ class GroupeController extends Controller
 
 			 $groupe->save();
 
-			return $this->sendResponse($groupe->toArray(), 'Groupe mis � jour avec succ�s.');
+			return $this->sendResponse($groupe->toArray(), 'Groupe mis a jour avec succes.');
 		}
 
 		/**
@@ -146,6 +146,6 @@ class GroupeController extends Controller
 
 			$groupe->delete();
 
-			return $this->sendResponse($groupe->toArray(), 'Groupe supprim� avec succ�s.');
+			return $this->sendResponse($groupe->toArray(), 'Groupe supprime avec succes.');
 		}
 }

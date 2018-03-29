@@ -16,13 +16,13 @@ class CreateGroupesTable extends Migration
     Schema::create('groupes', function (Blueprint $table) {
       $table->increments('id');
       $table->string('nom')->nullable(false); 		//(exemple Todjom-Qc): string
-      $table->string('mtle_reg');   							// (Matricule au r�gistaire des entreprises): string
+      $table->string('mtle_reg');   							// (Matricule au registaire des entreprises): string
       $table->string('descr');
       $table->dateTime('dtcre');
       $table->integer('dureexo');
       $table->dateTime('dbexo');
       $table->dateTime('cfinexo');
-      $table->string('contact')->nullable(false);				         // (Le repondant est une personne du groupe de type membre): Nom & prenom & t�l & couriel du r�pondant
+      $table->string('contact')->nullable(false);				         // (Le repondant est une personne du groupe de type membre): Nom & prenom & tel & couriel du repondant
       $table->unsignedInteger('location_id')->nullable(false); 				  /// Adresse du groupe	  FK vers location
       $table->string('tel')->nullable(false);
 

@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Location;
+use App\Location;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class LocationController extends Controller
+class LocationController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class LocationController extends Controller
 		 }
 			$locations = Location::all();
 
-			return $this->sendResponse($locations->toArray(), 'Locations extraits avec succ�s.');
+			return $this->sendResponse($locations->toArray(), 'Locations extraits avec succes.');
 		}
 
 		/**
@@ -52,7 +52,7 @@ class LocationController extends Controller
 
 			$location = Location::create($input);
 
-			return $this->sendResponse($location->toArray(), 'Location cr�� avec succ�s.');
+			return $this->sendResponse($location->toArray(), 'Location cree avec succes.');
 		}
 
 		/**
@@ -70,10 +70,10 @@ class LocationController extends Controller
 			$location = Location::find($id);
 
 			if (is_null($location)) {
-				return $this->sendError('location non trouv�.');
+				return $this->sendError('location non trouve.');
 			}
 
-			return $this->sendResponse($location->toArray(), 'location r�cup�r avec succ�s .');
+			return $this->sendResponse($location->toArray(), 'location recuper avec succes .');
 		}
 
 		/**
@@ -109,7 +109,7 @@ class LocationController extends Controller
 
 			 $location->save();
 
-			return $this->sendResponse($location->toArray(), 'Location mis � jour avec succ�s.');
+			return $this->sendResponse($location->toArray(), 'Location mis a jour avec succes.');
 		}
 
 		/**
@@ -126,6 +126,6 @@ class LocationController extends Controller
 
 			$location->delete();
 
-			return $this->sendResponse($location->toArray(), 'Location supprim�e avec succ�s.');
+			return $this->sendResponse($location->toArray(), 'Location supprimee avec succes.');
 		}
 }

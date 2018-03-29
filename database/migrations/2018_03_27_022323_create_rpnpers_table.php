@@ -18,8 +18,8 @@ class CreateRpnpersTable extends Migration
 
       $table->unsignedInteger('groupe_id');
       $table->unsignedInteger('pers_id');		  //(fk vers table personne, la personne inscrite)
-      $table->integer('repdt_id');		// (fk vers table personne, le r�pondant doit �tre une personne de type membre)
-      $table->dateTime('dtadh');		//   (date d'adh�sion)
+      $table->unsignedInteger('repdt_id');		// (fk vers table personne, le repondant doit etre une personne de type membre)
+      $table->dateTime('dtadh');		//   (date d'adhesion)
       $table->string('mtrle');		//  (matricule rpn)
       $table->integer('depot');
       $table->dateTime('dtmajdpt');

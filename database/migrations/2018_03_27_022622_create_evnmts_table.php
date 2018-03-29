@@ -29,7 +29,7 @@ class CreateEvnmtsTable extends Migration
 			$table->integer('resp1')->nullable();	;			//(pers_id)
 			$table->integer('resp2')->nullable();	;		 	//(pers_id)
 			$table->integer('resp3')->nullable();	;			 //(pers_id)
-			$table->boolean('affich');		 	//(affich� cet evnmt dans la page d'acceuile? Oui/Non)
+			$table->boolean('affich');		 	//(affiche cet evnmt dans la page d'acceuile? Oui/Non)
 
 				//Contraintes
 			//$table->primary('id');

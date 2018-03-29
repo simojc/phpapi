@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Engmtpers;
+use App\Engmtpers;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class EngmtpersController extends Controller
+class EngmtpersController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class EngmtpersController extends Controller
 		 }
 			$engmtpers = Engmtpers::all();
 
-			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers extraits avec succ�s.');
+			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers extraits avec succes.');
 		}
 
 		/**
@@ -51,7 +51,7 @@ class EngmtpersController extends Controller
 			]);
 
 			// $table->integer('engmt_id');
-			// $table->integer('pers_id');		  // (fk vers table personne; contrainte: la personne doit �tre de type membre)
+			// $table->integer('pers_id');		  // (fk vers table personne; contrainte: la personne doit etre de type membre)
 			// $table->integer('exercice');
 			// $table->integer('mont');
 			// $table->string('statut');
@@ -66,7 +66,7 @@ class EngmtpersController extends Controller
 
 			$engmtpers = Engmtpers::create($input);
 
-			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers cr�� avec succ�s.');
+			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers cree avec succes.');
 		}
 
 		/**
@@ -84,10 +84,10 @@ class EngmtpersController extends Controller
 			$engmtpers = Engmtpers::find($id);
 
 			if (is_null($engmtpers)) {
-				return $this->sendError('engmtpers non trouv�.');
+				return $this->sendError('engmtpers non trouve.');
 			}
 
-			return $this->sendResponse($engmtpers->toArray(), 'engmtpers r�cup�r avec succ�s .');
+			return $this->sendResponse($engmtpers->toArray(), 'engmtpers recuper avec succes .');
 		}
 
 		/**
@@ -132,7 +132,7 @@ class EngmtpersController extends Controller
 
 				$engmtpers->save();
 
-			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers mis � jour avec succ�s.');
+			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers mis a jour avec succes.');
 		}
 
 		/**
@@ -149,6 +149,6 @@ class EngmtpersController extends Controller
 
 			$engmtpers->delete();
 
-			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers supprim� avec succ�s.');
+			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers supprime avec succes.');
 		}
 }

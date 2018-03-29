@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Session;
+use App\Session;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class SessionController extends Controller
+class SessionController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class SessionController extends Controller
 		 }
 			$sessions = Session::all();
 
-			return $this->sendResponse($sessions->toArray(), 'Sessions extraits avec succ�s.');
+			return $this->sendResponse($sessions->toArray(), 'Sessions extraits avec succes.');
 		}
 
 		/**
@@ -53,7 +53,7 @@ class SessionController extends Controller
 
 			$session = Session::create($input);
 
-			return $this->sendResponse($session->toArray(), 'Session cr�� avec succ�s.');
+			return $this->sendResponse($session->toArray(), 'Session cree avec succes.');
 		}
 
 		/**
@@ -71,10 +71,10 @@ class SessionController extends Controller
 			$session = Session::find($id);
 
 			if (is_null($session)) {
-				return $this->sendError('session non trouv�.');
+				return $this->sendError('session non trouve.');
 			}
 
-			return $this->sendResponse($session->toArray(), 'session r�cup�r avec succ�s .');
+			return $this->sendResponse($session->toArray(), 'session recuper avec succes .');
 		}
 
 		/**
@@ -113,7 +113,7 @@ class SessionController extends Controller
 
 			 $session->save();
 
-			return $this->sendResponse($session->toArray(), 'Session mis � jour avec succ�s.');
+			return $this->sendResponse($session->toArray(), 'Session mis a jour avec succes.');
 		}
 
 		/**
@@ -130,6 +130,6 @@ class SessionController extends Controller
 
 			$session->delete();
 
-			return $this->sendResponse($session->toArray(), 'Session supprim� avec succ�s.');
+			return $this->sendResponse($session->toArray(), 'Session supprime avec succes.');
 		}
 }

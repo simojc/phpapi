@@ -23,7 +23,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 		 }
 			$events = Event::all();
 
-			return $this->sendResponse($events->toArray(), 'Events extraits avec succ�s.');
+			return $this->sendResponse($events->toArray(), 'Events extraits avec succes.');
 		}
 
 
@@ -54,7 +54,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 			$event = Event::create($input);
 
-			return $this->sendResponse($event->toArray(), 'Event cree avec succ�s.');
+			return $this->sendResponse($event->toArray(), 'Event cree avec succes.');
 		}
 
 		/**
@@ -72,10 +72,10 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 			$event = Event::find($id);
 
 			if (is_null($event)) {
-				return $this->sendError('event non trouv�.');
+				return $this->sendError('event non trouve.');
 			}
 
-			return $this->sendResponse($event->toArray(), 'event r�cup�r avec succ�s .');
+			return $this->sendResponse($event->toArray(), 'event recuper avec succes .');
 		}
 
 		/**
@@ -116,7 +116,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 			 $event->save();
 
-			return $this->sendResponse($event->toArray(), 'Event mis � jour avec succ�s.');
+			return $this->sendResponse($event->toArray(), 'Event mis a jour avec succes.');
 		}
 
 		/**
@@ -133,6 +133,6 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 			$event->delete();
 
-			return $this->sendResponse($event->toArray(), 'Event supprim� avec succ�s.');
+			return $this->sendResponse($event->toArray(), 'Event supprime avec succes.');
 		}
 	}

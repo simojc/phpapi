@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Engmt;
+use App\Engmt;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class EngmtController extends Controller
+class EngmtController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class EngmtController extends Controller
 		 }
 			$engmts = Engmt::all();
 
-			return $this->sendResponse($engmts->toArray(), 'Engmts extraits avec succ�s.');
+			return $this->sendResponse($engmts->toArray(), 'Engmts extraits avec succes.');
 		}
 
 		/**
@@ -54,9 +54,9 @@ class EngmtController extends Controller
 			// $table->string('descr');
 			// $table->string('periodicite');
 			// $table->string('periode');
-			// $table->string('statut');   ///--- valeurs: En cours, � venir, ferm� selon la p�riode
+			// $table->string('statut');   ///--- valeurs: En cours, e venir, ferme selon la periode
 			// $table->integer('mont_unit');
-			// $table->integer('totalper');   /// solde p�riode
+			// $table->integer('totalper');   /// solde periode
 
 
 			if($validator->fails()){
@@ -65,7 +65,7 @@ class EngmtController extends Controller
 
 			$engmt = Engmt::create($input);
 
-			return $this->sendResponse($engmt->toArray(), 'Engmt cr�� avec succ�s.');
+			return $this->sendResponse($engmt->toArray(), 'Engmt cree avec succes.');
 		}
 
 		/**
@@ -83,10 +83,10 @@ class EngmtController extends Controller
 			$engmt = Engmt::find($id);
 
 			if (is_null($engmt)) {
-				return $this->sendError('engmt non trouv�.');
+				return $this->sendError('engmt non trouve.');
 			}
 
-			return $this->sendResponse($engmt->toArray(), 'engmt r�cup�r avec succ�s .');
+			return $this->sendResponse($engmt->toArray(), 'engmt recuper avec succes .');
 		}
 
 		/**
@@ -130,7 +130,7 @@ class EngmtController extends Controller
 
 			 $engmt->save();
 
-			return $this->sendResponse($engmt->toArray(), 'Engmt mis � jour avec succ�s.');
+			return $this->sendResponse($engmt->toArray(), 'Engmt mis a jour avec succes.');
 		}
 
 		/**
@@ -147,6 +147,6 @@ class EngmtController extends Controller
 
 			$engmt->delete();
 
-			return $this->sendResponse($engmt->toArray(), 'Engmt supprim� avec succ�s.');
+			return $this->sendResponse($engmt->toArray(), 'Engmt supprime avec succes.');
 		}
 }

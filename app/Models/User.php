@@ -29,7 +29,7 @@ class User extends Authenticatable
 
 	public function groupe()
 	{
-		// return $this->belongsTo('App\Models\Groupe�);
+		// return $this->belongsTo('App\Models\Groupee);
 			return $this->belongsTo(Groupe::class);
 	}
 }

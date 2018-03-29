@@ -17,7 +17,7 @@ class Event extends Model
 			'onlineUrl',
 	];
 
-	public function session()
+	public function sessions()
  	{
 		return $this->hasMany('App\Models\Session');
 	}

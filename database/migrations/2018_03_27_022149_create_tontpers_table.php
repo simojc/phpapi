@@ -17,10 +17,10 @@ class CreateTontpersTable extends Migration
             $table->increments('id');
 
 			$table->unsignedInteger('tont_id');
-			$table->unsignedInteger('pers_id');			//  (fk vers table personne; contrainte: la personne doit �tre de type membre)
+			$table->unsignedInteger('pers_id');			//  (fk vers table personne; contrainte: la personne doit etre de type membre)
 			$table->integer('position');
 			$table->string('alias');		// si une pers a plus d''un nom
-			$table->string('statut');			  //(bouff� / non bouff�)
+			$table->string('statut');			  //(bouffe / non bouffe)
 			$table->string('comment');
 			$table->dateTime('dt_statut');
 

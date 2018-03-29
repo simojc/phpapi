@@ -18,17 +18,17 @@ class Groupe extends Model
 							'tel',  
 					]
 	
-		public function evnmt()
+		public function evnmts()
  		{ 
 			return $this->hasMany('App\Models\Evnmt'); 
 		}
 
-		public function user()
+		public function users()
  		{ 
 			return $this->hasMany('App\Models\User'); 
 		}
 
-		public function tont()
+		public function tonts()
  		{ 
 			return $this->hasMany('App\Models\Tont'); 
 		}
@@ -38,7 +38,7 @@ class Groupe extends Model
 			return $this->hasMany('App\Models\Rpnpers'); 
 		}
 
-		public function engmt()
+		public function engmts()
  		{ 
 			return $this->hasMany('App\Models\Engmt'); 
 		}

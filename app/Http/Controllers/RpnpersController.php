@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Rpnpers;
+use App\Rpnpers;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class RpnpersController extends Controller
+class RpnpersController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class RpnpersController extends Controller
 		 }
 			$rpnperss = Rpnpers::all();
 
-			return $this->sendResponse($rpnperss->toArray(), 'Rpnpersonnes extraites avec succ�s.');
+			return $this->sendResponse($rpnperss->toArray(), 'Rpnpersonnes extraites avec succes.');
 		}
 
 		/**
@@ -55,7 +55,7 @@ class RpnpersController extends Controller
 
 			$rpnpers = Rpnpers::create($input);
 
-			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers cr�� avec succ�s.');
+			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers cree avec succes.');
 		}
 
 		/**
@@ -73,10 +73,10 @@ class RpnpersController extends Controller
 			$rpnpers = Rpnpers::find($id);
 
 			if (is_null($rpnpers)) {
-				return $this->sendError('rpnpers non trouv�.');
+				return $this->sendError('rpnpers non trouve.');
 			}
 
-			return $this->sendResponse($rpnpers->toArray(), 'rpnpers r�cup�r avec succ�s .');
+			return $this->sendResponse($rpnpers->toArray(), 'rpnpers recuper avec succes .');
 		}
 
 		/**
@@ -119,7 +119,7 @@ class RpnpersController extends Controller
 
 			$rpnpers->save();
 
-			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers mis � jour avec succ�s.');
+			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers mis a jour avec succes.');
 		}
 
 		/**
@@ -136,6 +136,6 @@ class RpnpersController extends Controller
 
 			$rpnpers->delete();
 
-			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers supprim�e avec succ�s.');
+			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers supprimee avec succes.');
 		}
 }

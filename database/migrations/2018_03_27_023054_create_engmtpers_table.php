@@ -17,7 +17,7 @@ class CreateEngmtpersTable extends Migration
       $table->increments('id');
 
       $table->unsignedInteger('engmt_id');
-      $table->unsignedInteger('pers_id');		  // (fk vers table personne; contrainte: la personne doit �tre de type membre)
+      $table->unsignedInteger('pers_id');		  // (fk vers table personne; contrainte: la personne doit etre de type membre)
       $table->integer('exercice');
       $table->integer('mont');
       $table->string('statut');

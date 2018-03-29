@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers;
 
@@ -15,11 +15,11 @@ use JWTAuth;
 use App\Http\requests\RegisterFormRequest;
 
 class AuthController extends Controller
+
 {
     //The register method  will handle user registrations
       public function register(Request $request)
       {
-
         $this->validate($request, [
                 'name' => 'required|string|unique:users',
                 'email' => 'required|email|unique:users',
@@ -38,7 +38,7 @@ class AuthController extends Controller
 
           if ($user->save()) {
                 $user->signin = [
-                'href' => 'api/v1/user/signin',
+                //'href' => 'api/v1/user/signin',
                 'method' => 'POST',
                 'params' => 'email, password'
                 ];
@@ -79,7 +79,7 @@ class AuthController extends Controller
           'status' => 'success','
           token' => $token]
         );
-    }
+		}
 
       // user method which will return current user information
       public function user(Request $request)
@@ -142,7 +142,7 @@ class AuthController extends Controller
 
 			 $util->save();
 
-			return $this->sendResponse($util->toArray(), 'User mis � jour avec succ�s.');
+			return $this->sendResponse($util->toArray(), 'User mis a jour avec succes.');
 		}
 
 

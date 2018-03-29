@@ -22,7 +22,7 @@ class CreateTontsTable extends Migration
 			$table->integer('mtpart');
 			$table->dateTime('dtdeb');
 			$table->dateTime('dtfin');
-			$table->string('cot_dern');		  /// Ce champ est encore � analyser
+			$table->string('cot_dern');		  /// Ce champ est encore e analyser
 
 			// Contraintes
 			//$table->primary('id');

@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
-use App\Models\Pers;
+use App\Pers;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
-class PersController extends Controller
+class PersController extends BaseController
 {
     /**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@ class PersController extends Controller
 		 }
 			$perss = Pers::all();
 
-			return $this->sendResponse($perss->toArray(), 'Personnes extraites avec succ�s.');
+			return $this->sendResponse($perss->toArray(), 'Personnes extraites avec succes.');
 		}
 
 		/**
@@ -57,7 +57,7 @@ class PersController extends Controller
 
 			$pers = Pers::create($input);
 
-			return $this->sendResponse($pers->toArray(), 'Pers cr�� avec succ�s.');
+			return $this->sendResponse($pers->toArray(), 'Pers cree avec succes.');
 		}
 
 		/**
@@ -75,10 +75,10 @@ class PersController extends Controller
 			$pers = Pers::find($id);
 
 			if (is_null($pers)) {
-				return $this->sendError('pers non trouv�.');
+				return $this->sendError('pers non trouve.');
 			}
 
-			return $this->sendResponse($pers->toArray(), 'pers r�cup�r avec succ�s .');
+			return $this->sendResponse($pers->toArray(), 'pers recuper avec succes .');
 		}
 
 		/**
@@ -128,7 +128,7 @@ class PersController extends Controller
 
 				$pers->save();
 
-				return $this->sendResponse($pers->toArray(), 'Pers mis � jour avec succ�s.');
+				return $this->sendResponse($pers->toArray(), 'Pers mis a jour avec succes.');
 		}
 
 		/**
@@ -145,6 +145,6 @@ class PersController extends Controller
 
 			$pers->delete();
 
-			return $this->sendResponse($pers->toArray(), 'Pers supprim�e avec succ�s.');
+			return $this->sendResponse($pers->toArray(), 'Pers supprimee avec succes.');
 		}
 }
