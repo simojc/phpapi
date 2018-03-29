@@ -24,17 +24,17 @@ class AuthController extends Controller
                 'name' => 'required|string|unique:users',
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:6|max:10',
-				'groupe_id' => 'required'
+				        'groupe_id' => 'required'
                ]);
 
             $user = new User;
             $user->email = $request->email;
             $user->name = $request->name;
-		
+
             $user->password = bcrypt($request->password);
 
 			// renseigner le groupe avec une variable globale dans le frontend Angular
-			$user->groupe_id = $request->groupe_id;   
+			$user->groupe_id = $request->groupe_id;
 
           if ($user->save()) {
                 $user->signin = [
@@ -138,11 +138,11 @@ class AuthController extends Controller
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			  $util->admin = $input['admin'];            
-				
+			  $util->admin = $input['admin'];
+
 			 $util->save();
 
-			return $this->sendResponse($util->toArray(), 'User mis à jour avec succès.');
+			return $this->sendResponse($util->toArray(), 'User mis ï¿½ jour avec succï¿½s.');
 		}
 
 

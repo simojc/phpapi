@@ -1,13 +1,13 @@
 <?php
 
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
 use App\Models\Tont;
 use Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
-use Illuminate\Http\Request;
 
 class TontController extends Controller
 {
@@ -23,7 +23,7 @@ class TontController extends Controller
 		 }
 			$tonts = Tont::all();
 
-			return $this->sendResponse($tonts->toArray(), 'Tonts extraits avec succès.');
+			return $this->sendResponse($tonts->toArray(), 'Tonts extraits avec succï¿½s.');
 		}
 
 		/**
@@ -45,16 +45,16 @@ class TontController extends Controller
 				'descr'=> 'required',
 				'mtpart'=> 'required',
 				'dtdeb'=> 'required',
-				'dtfin'=> 'required',				
-			]);			
+				'dtfin'=> 'required'
+			]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$tont = ::create($input);
+			$tont = Tont::create($input);
 
-			return $this->sendResponse($tont->toArray(), 'Tont créé avec succès.');
+			return $this->sendResponse($tont->toArray(), 'Tont crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -72,10 +72,10 @@ class TontController extends Controller
 			$tont = Tont::find($id);
 
 			if (is_null($tont)) {
-				return $this->sendError('tont non trouvé.');
+				return $this->sendError('tont non trouvï¿½.');
 			}
 
-			return $this->sendResponse($tont->toArray(), 'tont récupér avec succès .');
+			return $this->sendResponse($tont->toArray(), 'tont rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -100,13 +100,13 @@ class TontController extends Controller
 				'descr'=> 'required',
 				'mtpart'=> 'required',
 				'dtdeb'=> 'required',
-				'dtfin'=> 'required',				
+				'dtfin'=> 'required'
 			]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
-			
+
 			$tont->groupe_id = $input['groupe_id'];
 			$tont->nom = $input['nom'];
 			$tont->descr = $input['descr'];
@@ -114,10 +114,10 @@ class TontController extends Controller
 			$tont->dtdeb = $input['dtdeb'];
 			$tont->dtfin = $input['dtfin'];
 			$tont->cot_dern = $input['cot_dern'];
-				
+
 			 $tont->save();
 
-			return $this->sendResponse($tont->toArray(), 'Tont mis à jour avec succès.');
+			return $this->sendResponse($tont->toArray(), 'Tont mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -134,8 +134,6 @@ class TontController extends Controller
 
 			$tont->delete();
 
-			return $this->sendResponse($tont->toArray(), 'Tont supprimé avec succès.');
+			return $this->sendResponse($tont->toArray(), 'Tont supprime avec succes.');
 		}
 }
-
-

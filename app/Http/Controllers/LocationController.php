@@ -23,7 +23,7 @@ class LocationController extends Controller
 		 }
 			$locations = Location::all();
 
-			return $this->sendResponse($locations->toArray(), 'Locations extraits avec succès.');
+			return $this->sendResponse($locations->toArray(), 'Locations extraits avec succï¿½s.');
 		}
 
 		/**
@@ -42,17 +42,17 @@ class LocationController extends Controller
 				$validator = Validator::make($input, [
 				'address'=> 'required',
 				'city'=> 'required',
-				'country'=> 'required'			
+				'country'=> 'required'
 			]);
-			
+
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$location = ::create($input);
+			$location = Location::create($input);
 
-			return $this->sendResponse($location->toArray(), 'Location créé avec succès.');
+			return $this->sendResponse($location->toArray(), 'Location crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -70,10 +70,10 @@ class LocationController extends Controller
 			$location = Location::find($id);
 
 			if (is_null($location)) {
-				return $this->sendError('location non trouvé.');
+				return $this->sendError('location non trouvï¿½.');
 			}
 
-			return $this->sendResponse($location->toArray(), 'location récupér avec succès .');
+			return $this->sendResponse($location->toArray(), 'location rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -95,9 +95,9 @@ class LocationController extends Controller
 				$validator = Validator::make($input, [
 				'address'=> 'required',
 				'city'=> 'required',
-				'country'=> 'required'			
+				'country'=> 'required'
 			]);
-			
+
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
@@ -105,11 +105,11 @@ class LocationController extends Controller
 
 				$location->address = $input['address'];
 				$location->city = $input['city'];
-				$location->country = $input['country'];				
-				
+				$location->country = $input['country'];
+
 			 $location->save();
 
-			return $this->sendResponse($location->toArray(), 'Location mis à jour avec succès.');
+			return $this->sendResponse($location->toArray(), 'Location mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -126,6 +126,6 @@ class LocationController extends Controller
 
 			$location->delete();
 
-			return $this->sendResponse($location->toArray(), 'Location supprimée avec succès.');
+			return $this->sendResponse($location->toArray(), 'Location supprimï¿½e avec succï¿½s.');
 		}
 }

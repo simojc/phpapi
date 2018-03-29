@@ -16,14 +16,14 @@ class CreateTontpersTable extends Migration
         Schema::create('tontpers', function (Blueprint $table) {
             $table->increments('id');
 
-			$table->integer('tont_id');			
-			$table->integer('pers_id');			//  (fk vers table personne; contrainte: la personne doit être de type membre)
-			$table->integer('position');			
-			$table->string('alias');		// si une pers a plus d''un nom  		
-			$table->string('statut');			  //(bouffé / non bouffé)
+			$table->unsignedInteger('tont_id');
+			$table->unsignedInteger('pers_id');			//  (fk vers table personne; contrainte: la personne doit ï¿½tre de type membre)
+			$table->integer('position');
+			$table->string('alias');		// si une pers a plus d''un nom
+			$table->string('statut');			  //(bouffï¿½ / non bouffï¿½)
 			$table->string('comment');
-			$table->dateTime('dt_statut');	
-			
+			$table->dateTime('dt_statut');
+
 			//Contraintes
 		//	$table->primary('id');
 
@@ -32,7 +32,7 @@ class CreateTontpersTable extends Migration
 				  ->onDelete('cascade');
 			$table->foreign('pers_id')
 				  ->references('id')->on('pers')
-				  ->onDelete('cascade');	
+				  ->onDelete('cascade');
 
             $table->timestamps();
         });

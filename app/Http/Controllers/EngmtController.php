@@ -23,7 +23,7 @@ class EngmtController extends Controller
 		 }
 			$engmts = Engmt::all();
 
-			return $this->sendResponse($engmts->toArray(), 'Engmts extraits avec succès.');
+			return $this->sendResponse($engmts->toArray(), 'Engmts extraits avec succï¿½s.');
 		}
 
 		/**
@@ -49,23 +49,23 @@ class EngmtController extends Controller
 				'totalper'=> 'required'
 			]);
 
-			// $table->integer('groupe_id');			
-			// $table->string('nom');		 			
-			// $table->string('descr');			
-			// $table->string('periodicite');	
-			// $table->string('periode');	
-			// $table->string('statut');   ///--- valeurs: En cours, à venir, fermé selon la période
-			// $table->integer('mont_unit');		
-			// $table->integer('totalper');   /// solde période
-			
-			
+			// $table->integer('groupe_id');
+			// $table->string('nom');
+			// $table->string('descr');
+			// $table->string('periodicite');
+			// $table->string('periode');
+			// $table->string('statut');   ///--- valeurs: En cours, ï¿½ venir, fermï¿½ selon la pï¿½riode
+			// $table->integer('mont_unit');
+			// $table->integer('totalper');   /// solde pï¿½riode
+
+
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
-			}
+			};
 
-			$engmt = ::create($input);
+			$engmt = Engmt::create($input);
 
-			return $this->sendResponse($engmt->toArray(), 'Engmt créé avec succès.');
+			return $this->sendResponse($engmt->toArray(), 'Engmt crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -83,10 +83,10 @@ class EngmtController extends Controller
 			$engmt = Engmt::find($id);
 
 			if (is_null($engmt)) {
-				return $this->sendError('engmt non trouvé.');
+				return $this->sendError('engmt non trouvï¿½.');
 			}
 
-			return $this->sendResponse($engmt->toArray(), 'engmt récupér avec succès .');
+			return $this->sendResponse($engmt->toArray(), 'engmt rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -127,10 +127,10 @@ class EngmtController extends Controller
 
 				$engmt->mont_unit = $input['mont_unit'];
 				$engmt->totalper = $input['totalper'];
-				
+
 			 $engmt->save();
 
-			return $this->sendResponse($engmt->toArray(), 'Engmt mis à jour avec succès.');
+			return $this->sendResponse($engmt->toArray(), 'Engmt mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -147,6 +147,6 @@ class EngmtController extends Controller
 
 			$engmt->delete();
 
-			return $this->sendResponse($engmt->toArray(), 'Engmt supprimé avec succès.');
+			return $this->sendResponse($engmt->toArray(), 'Engmt supprimï¿½ avec succï¿½s.');
 		}
 }

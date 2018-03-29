@@ -23,7 +23,7 @@ class GroupeController extends Controller
 		 }
 			$groupes = Groupe::all();
 
-			return $this->sendResponse($groupes->toArray(), 'Groupes extraits avec succès.');
+			return $this->sendResponse($groupes->toArray(), 'Groupes extraits avec succï¿½s.');
 		}
 
 		/**
@@ -44,8 +44,8 @@ class GroupeController extends Controller
 				'mtle_reg'=> 'required',
 				'descr'=> 'required',
 				'dtcre'=> 'required',
-				'dureexo'=> 'required'
-				
+				'dureexo'=> 'required',
+
 				'dbexo'=> 'required',
 				'cfinexo'=> 'required',
 				'dureexo'=> 'required'
@@ -55,9 +55,9 @@ class GroupeController extends Controller
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$groupe = ::create($input);
+			$groupe = Groupe::create($input);
 
-			return $this->sendResponse($groupe->toArray(), 'Groupe créé avec succès.');
+			return $this->sendResponse($groupe->toArray(), 'Groupe crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -75,10 +75,10 @@ class GroupeController extends Controller
 			$groupe = Groupe::find($id);
 
 			if (is_null($groupe)) {
-				return $this->sendError('groupe non trouvé.');
+				return $this->sendError('groupe non trouvï¿½.');
 			}
 
-			return $this->sendResponse($groupe->toArray(), 'groupe récupér avec succès .');
+			return $this->sendResponse($groupe->toArray(), 'groupe rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -102,34 +102,34 @@ class GroupeController extends Controller
 				'mtle_reg'=> 'required',
 				'descr'=> 'required',
 				'dtcre'=> 'required',
-				'dureexo'=> 'required'
-				
+				'dureexo'=> 'required',
+
 				'dbexo'=> 'required',
 				'cfinexo'=> 'required',
 				'dureexo'=> 'required'
-			]);			
+			]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
-				
+
 				$groupe->nom = $input['nom'];
 				$groupe->mtle_reg = $input['mtle_reg'];
 				$groupe->descr = $input['descr'];
 				$groupe->dtcre = $input['dtcre'];
-				
+
 				$groupe->dureexo = $input['dureexo'];
 				$groupe->dbexo = $input['dbexo'];
 				$groupe->cfinexo = $input['cfinexo'];
-				
+
 				$groupe->contact = $input['contact'];
 				$groupe->location_id = $input['location_id'];
 				$groupe->tel = $input['tel'];
-			
-				
+
+
 			 $groupe->save();
 
-			return $this->sendResponse($groupe->toArray(), 'Groupe mis à jour avec succès.');
+			return $this->sendResponse($groupe->toArray(), 'Groupe mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -146,6 +146,6 @@ class GroupeController extends Controller
 
 			$groupe->delete();
 
-			return $this->sendResponse($groupe->toArray(), 'Groupe supprimé avec succès.');
+			return $this->sendResponse($groupe->toArray(), 'Groupe supprimï¿½ avec succï¿½s.');
 		}
 }

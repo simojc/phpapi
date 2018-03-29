@@ -23,7 +23,7 @@ class RpnpersController extends Controller
 		 }
 			$rpnperss = Rpnpers::all();
 
-			return $this->sendResponse($rpnperss->toArray(), 'Rpnpersonnes extraites avec succès.');
+			return $this->sendResponse($rpnperss->toArray(), 'Rpnpersonnes extraites avec succï¿½s.');
 		}
 
 		/**
@@ -42,20 +42,20 @@ class RpnpersController extends Controller
 			$validator = Validator::make($input, [
 				'groupe_id'=> 'required',
 				'pers_id'=> 'required',
-				'repdt_id'=> 'required',	
+				'repdt_id'=> 'required',
 				'dtadh'=> 'required',
 				'mtrle'=> 'required',
 				'depot'=> 'required',
-				'dtmajdpt'=> 'required'		
-			]);			
-			
+				'dtmajdpt'=> 'required'
+			]);
+
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$rpnpers = ::create($input);
+			$rpnpers = Rpnpers::create($input);
 
-			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers créé avec succès.');
+			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -73,10 +73,10 @@ class RpnpersController extends Controller
 			$rpnpers = Rpnpers::find($id);
 
 			if (is_null($rpnpers)) {
-				return $this->sendError('rpnpers non trouvé.');
+				return $this->sendError('rpnpers non trouvï¿½.');
 			}
 
-			return $this->sendResponse($rpnpers->toArray(), 'rpnpers récupér avec succès .');
+			return $this->sendResponse($rpnpers->toArray(), 'rpnpers rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -98,28 +98,28 @@ class RpnpersController extends Controller
 				$validator = Validator::make($input, [
 				'groupe_id'=> 'required',
 				'pers_id'=> 'required',
-				'repdt_id'=> 'required',	
+				'repdt_id'=> 'required',
 				'dtadh'=> 'required',
 				'mtrle'=> 'required',
 				'depot'=> 'required',
-				'dtmajdpt'=> 'required'		
+				'dtmajdpt'=> 'required'
 			]);
-			
+
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
-			
+
 			$rpnpers->groupe_id = $input['groupe_id'];
 			$rpnpers->pers_id = $input['pers_id'];
-			$rpnpers->repdt_id = $input['repdt_id'];		
+			$rpnpers->repdt_id = $input['repdt_id'];
 			$rpnpers->dtadh = $input['dtadh'];
 			$rpnpers->mtrle = $input['mtrle'];
-			$rpnpers->depot = $input['depot'];	
+			$rpnpers->depot = $input['depot'];
 			$rpnpers->dtmajdpt = $input['dtmajdpt'];
-			
+
 			$rpnpers->save();
 
-			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers mis à jour avec succès.');
+			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -136,8 +136,6 @@ class RpnpersController extends Controller
 
 			$rpnpers->delete();
 
-			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers supprimée avec succès.');
+			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers supprimï¿½e avec succï¿½s.');
 		}
 }
-
-

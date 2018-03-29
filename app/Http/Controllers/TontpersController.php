@@ -23,7 +23,7 @@ class TontpersController extends Controller
 		 }
 			$tontperss = Tontpers::all();
 
-			return $this->sendResponse($tontperss->toArray(), 'Tontperss extraits avec succès.');
+			return $this->sendResponse($tontperss->toArray(), 'Tontperss extraits avec succï¿½s.');
 		}
 
 		/**
@@ -46,16 +46,16 @@ class TontpersController extends Controller
 				'alias'=> 'required',
 				'statut'=> 'required',
 				'dt_statut'=> 'required',
-				'comment'=> 'required'				
-			]);			
-						
+				'comment'=> 'required'
+			]);
+
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$tontpers = ::create($input);
+			$tontpers = Tontpers::create($input);
 
-			return $this->sendResponse($tontpers->toArray(), 'Tontpers créé avec succès.');
+			return $this->sendResponse($tontpers->toArray(), 'Tontpers crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -73,10 +73,10 @@ class TontpersController extends Controller
 			$tontpers = Tontpers::find($id);
 
 			if (is_null($tontpers)) {
-				return $this->sendError('tontpers non trouvé.');
+				return $this->sendError('tontpers non trouvï¿½.');
 			}
 
-			return $this->sendResponse($tontpers->toArray(), 'tontpers récupér avec succès .');
+			return $this->sendResponse($tontpers->toArray(), 'tontpers rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -102,13 +102,13 @@ class TontpersController extends Controller
 				'alias'=> 'required',
 				'statut'=> 'required',
 				'dt_statut'=> 'required',
-				'comment'=> 'required'				
-			]);	
+				'comment'=> 'required'
+			]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
-			}			
-			
+			}
+
 			$tontpers->tont_id = $input['tont_id'];
 			$tontpers->pers_id = $input['pers_id'];
 			$tontpers->position = $input['position'];
@@ -116,10 +116,10 @@ class TontpersController extends Controller
 			$tontpers->statut = $input['statut'];
 			$tontpers->comment = $input['comment'];
 			$tontpers->dt_statut = $input['dt_statut'];
-				
+
 			$tontpers->save();
 
-			return $this->sendResponse($tontpers->toArray(), 'Tontpers mis à jour avec succès.');
+			return $this->sendResponse($tontpers->toArray(), 'Tontpers mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -136,6 +136,6 @@ class TontpersController extends Controller
 
 			$tontpers->delete();
 
-			return $this->sendResponse($tontpers->toArray(), 'Tontpers supprimé avec succès.');
+			return $this->sendResponse($tontpers->toArray(), 'Tontpers supprimï¿½ avec succï¿½s.');
 		}
 }

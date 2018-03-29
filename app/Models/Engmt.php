@@ -10,18 +10,18 @@ class Engmt extends Model
 		   protected $fillable = [
 			'nom', 'descr', 'periodicite',
 			'periode', 'statut', 'mont_unit',
-			'totalper', 
+			'totalper',
 		];
 
-		public function groupe() 
+		public function groupe()
 		{
-			// return $this->belongsTo('App\Models\Groupe’); 
-			  return $this->belongsTo(Groupe::class); 
-		};
+			// return $this->belongsTo('App\Models\Groupeï¿½);
+			  return $this->belongsTo(Groupe::class);
+		}
 
 		public function engmtpers()
- 		{ 
-			return $this->hasMany('App\Models\Engmtpers'); 
+ 		{
+			return $this->hasMany('App\Models\Engmtpers');
 		}
 
 }

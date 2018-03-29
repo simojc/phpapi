@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    //
+
 	 protected $fillable = [
 			'name',
 			'date',
 			'time',
 			'price',
-			'imageUrl',    
-			'onlineUrl',   
-	]
-	
+			'location_id',
+			'imageUrl',
+			'onlineUrl',
+	];
 
 	public function session()
- 	{ 
-		return $this->hasMany('App\Models\Session'); 
+ 	{
+		return $this->hasMany('App\Models\Session');
 	}
 
 	public function location()

@@ -23,7 +23,7 @@ class EngmtpersController extends Controller
 		 }
 			$engmtpers = Engmtpers::all();
 
-			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers extraits avec succès.');
+			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers extraits avec succï¿½s.');
 		}
 
 		/**
@@ -50,23 +50,23 @@ class EngmtpersController extends Controller
 				'dt_ech'=> 'required'
 			]);
 
-			// $table->integer('engmt_id');		
-			// $table->integer('pers_id');		  // (fk vers table personne; contrainte: la personne doit être de type membre)
-			// $table->integer('exercice');		
-			// $table->integer('mont');			
-			// $table->string('statut');	
+			// $table->integer('engmt_id');
+			// $table->integer('pers_id');		  // (fk vers table personne; contrainte: la personne doit ï¿½tre de type membre)
+			// $table->integer('exercice');
+			// $table->integer('mont');
+			// $table->string('statut');
 			// $table->string('dtchgst');
-			// $table->string('message');			
-			// $table->dateTime('dt_ech');	
-			
-			
+			// $table->string('message');
+			// $table->dateTime('dt_ech');
+
+
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$engmtpers = ::create($input);
+			$engmtpers = Engmtpers::create($input);
 
-			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers créé avec succès.');
+			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -84,10 +84,10 @@ class EngmtpersController extends Controller
 			$engmtpers = Engmtpers::find($id);
 
 			if (is_null($engmtpers)) {
-				return $this->sendError('engmtpers non trouvé.');
+				return $this->sendError('engmtpers non trouvï¿½.');
 			}
 
-			return $this->sendResponse($engmtpers->toArray(), 'engmtpers récupér avec succès .');
+			return $this->sendResponse($engmtpers->toArray(), 'engmtpers rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -121,16 +121,6 @@ class EngmtpersController extends Controller
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			
-			// $table->integer('engmt_id');		
-			// $table->integer('pers_id');		  // (fk vers table personne; contrainte: la personne doit être de type membre)
-			// $table->integer('exercice');		
-			// $table->integer('mont');			
-			// $table->string('statut');	
-			// $table->string('dtchgst');
-			// $table->string('message');			
-			// $table->dateTime('dt_ech');	
-			
 				$engmtpers->engmt_id = $input['engmt_id'];
 				$engmtpers->pers_id = $input['pers_id'];
 				$engmtpers->exercice = $input['exercice'];
@@ -139,10 +129,10 @@ class EngmtpersController extends Controller
 				$engmtpers->dtchgst = $input['dtchgst'];
 				$engmtpers->message = $input['message'];
 				$engmtpers->dt_ech = $input['dt_ech'];
-				
+
 				$engmtpers->save();
 
-			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers mis à jour avec succès.');
+			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -159,6 +149,6 @@ class EngmtpersController extends Controller
 
 			$engmtpers->delete();
 
-			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers supprimé avec succès.');
+			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers supprimï¿½ avec succï¿½s.');
 		}
 }

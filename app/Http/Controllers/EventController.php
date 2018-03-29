@@ -1,15 +1,15 @@
-	<?php
+<?php
 
-	namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-	use Illuminate\Http\Request;
-	use App\Http\Controllers\BaseController as BaseController;
-	use App\Models\Event;
-	use Validator;
-	use JWTAuth;
-	use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController as BaseController;
+use App\Event;
+use Validator;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
-	class EventController extends Controller
+	class EventController extends BaseController
 	{
 		/**
 		 * Display a listing of the resource.
@@ -23,7 +23,7 @@
 		 }
 			$events = Event::all();
 
-			return $this->sendResponse($events->toArray(), 'Events extraits avec succès.');
+			return $this->sendResponse($events->toArray(), 'Events extraits avec succï¿½s.');
 		}
 
 
@@ -41,19 +41,20 @@
 			$input = $request->all();
 
 			$validator = Validator::make($input, [
-				'name'=> 'required',
-				'date'=> 'required',
-				'time'=> 'required',
-				'price'=> 'required'
-			]);
+			'name'=> 'required',
+			'date'=> 'required',
+			'time'=> 'required',
+			'price'=> 'required',
+			'location_id'=> 'required'
+		]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$event = Product::create($input);
+			$event = Event::create($input);
 
-			return $this->sendResponse($events->toArray(), 'Event créé avec succès.');
+			return $this->sendResponse($event->toArray(), 'Event cree avec succï¿½s.');
 		}
 
 		/**
@@ -71,10 +72,10 @@
 			$event = Event::find($id);
 
 			if (is_null($event)) {
-				return $this->sendError('event non trouvé.');
+				return $this->sendError('event non trouvï¿½.');
 			}
 
-			return $this->sendResponse($event->toArray(), 'event récupér avec succès .');
+			return $this->sendResponse($event->toArray(), 'event rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -97,7 +98,8 @@
 				'name'=> 'required',
 				'date'=> 'required',
 				'time'=> 'required',
-				'price'=> 'required'
+				'price'=> 'required',
+				'location_id'=> 'required'
 			]);
 
 			if($validator->fails()){
@@ -108,12 +110,13 @@
 				$event->date = $input['date'];
 				$event->time = $input['time'];
 				$event->price = $input['price'];
-				$event->imageUrl = $input['imageUrl'];    
-				$event->onlineUrl = $input['onlineUrl']; 
+				$event->location_id = $input['location_id'];
+				$event->imageUrl = $input['imageUrl'];
+				$event->onlineUrl = $input['onlineUrl'];
 
 			 $event->save();
 
-			return $this->sendResponse($event->toArray(), 'Event mis à jour avec succès.');
+			return $this->sendResponse($event->toArray(), 'Event mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -130,6 +133,6 @@
 
 			$event->delete();
 
-			return $this->sendResponse($event->toArray(), 'Event supprimé avec succès.');
+			return $this->sendResponse($event->toArray(), 'Event supprimï¿½ avec succï¿½s.');
 		}
 	}

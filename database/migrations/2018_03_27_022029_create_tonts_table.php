@@ -16,20 +16,20 @@ class CreateTontsTable extends Migration
         Schema::create('tonts', function (Blueprint $table) {
             $table->increments('id');
 
-			$table->integer('groupe_id');
+			$table->unsignedInteger('groupe_id');
 			$table->integer('nom');
 			$table->string('descr');
-			$table->integer('mtpart');		
-			$table->dateTime('dtdeb');	 	
-			$table->dateTime('dtfin');	 	
-			$table->string('cot_dern');		  /// Ce champ est encore à analyser
+			$table->integer('mtpart');
+			$table->dateTime('dtdeb');
+			$table->dateTime('dtfin');
+			$table->string('cot_dern');		  /// Ce champ est encore ï¿½ analyser
 
 			// Contraintes
 			//$table->primary('id');
 			$table->foreign('groupe_id')
 			  ->references('id')->on('groupes')
 			  ->onDelete('cascade');
-			
+
             $table->timestamps();
         });
     }

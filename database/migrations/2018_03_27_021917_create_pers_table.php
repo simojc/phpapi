@@ -16,19 +16,19 @@ class CreatePersTable extends Migration
         Schema::create('pers', function (Blueprint $table) {
             $table->increments('id');
 
-			$table->integer('user_id')->nullable(false); 		//  (Une personne est rattacé à un utilisateur existant, ce qui fait aussi le lien avec le groupe)
-			$table->string('type')->nullable(false);				// (membre,fils/fille du membre, conjoint/conjointe du membre,  cousin/cousine du membre, niece/neuveu du membre, frère / soeur du membre, ami/amie du membre, autre lien du membre)
-			$table->string('nom')->nullable(false);				
-			$table->string('prenom')->nullable(false);			
-			$table->string('sexe')->nullable(false);				
-			$table->string('email')->nullable(false);		  	
-			$table->string('telcel')->nullable(false);			
-			$table->string('telres');			
-			$table->integer('location_id'); 				  /// Adresse du groupe	  FK vers location
-			$table->string('emploi');			
-			$table->string('dom_activ')->nullable();	 	//	(domaine d'activité de la personne)
-			$table->string('titre_adh')->nullable();	 	// 	(Le titre d'adhésion ou responsabilité au sein du groupe: membre régulier, président, sécrétaire, commissaire aucompte etc...)
-			
+			$table->unsignedInteger('user_id')->nullable(false); 		//  (Une personne est rattacï¿½ ï¿½ un utilisateur existant, ce qui fait aussi le lien avec le groupe)
+			$table->string('type')->nullable(false);				// (membre,fils/fille du membre, conjoint/conjointe du membre,  cousin/cousine du membre, niece/neuveu du membre, frï¿½re / soeur du membre, ami/amie du membre, autre lien du membre)
+			$table->string('nom')->nullable(false);
+			$table->string('prenom')->nullable(false);
+			$table->string('sexe')->nullable(false);
+			$table->string('email')->nullable(false);
+			$table->string('telcel')->nullable(false);
+			$table->string('telres');
+			$table->unsignedInteger('location_id'); 				  /// Adresse du groupe	  FK vers location
+			$table->string('emploi');
+			$table->string('dom_activ')->nullable();	 	//	(domaine d'activitï¿½ de la personne)
+			$table->string('titre_adh')->nullable();	 	// 	(Le titre d'adhï¿½sion ou responsabilitï¿½ au sein du groupe: membre rï¿½gulier, prï¿½sident, sï¿½crï¿½taire, commissaire aucompte etc...)
+
 			// contraintes PK et FK
 			//$table->primary('id');
 			$table->foreign('user_id')
@@ -36,7 +36,7 @@ class CreatePersTable extends Migration
 			  ->onDelete('cascade');
 			$table->foreign('location_id')
 				->references('id')->on('locations')
-				->onDelete('cascade');			
+				->onDelete('cascade');
 
             $table->timestamps();
         });

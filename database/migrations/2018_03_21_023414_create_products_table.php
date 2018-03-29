@@ -21,7 +21,6 @@ use Illuminate\Database\Migrations\Migration;
               });
           }
 
-
           /**
           * Reverse the migrations.
           *

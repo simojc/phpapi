@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
 			$table->string('time');
 			$table->decimal('price');
 			$table->string('imageUrl');
-			$table->integer('location_id');
+			$table->unsignedInteger('location_id');
 			$table->string('onlineUrl');
 
 			//$table->primary('id');

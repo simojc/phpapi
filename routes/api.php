@@ -40,3 +40,53 @@ Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh'
  Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('products', 'ProductController');
  });
+
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('engmts', 'EngmtController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('engmtpers', 'EngmtpersController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('events', 'EventController');
+ });
+
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('evnmts', 'EvnmtController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+    Route::resource('groupes', 'GroupeController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('locations', 'LocationController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('pers', 'PersController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('products', 'ProductController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('rpnpers', 'RpnpersController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('sessions', 'SessionController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('tonts', 'TontController');
+ });
+
+ Route::group(['middleware' => 'jwt.auth'], function(){
+   Route::resource('tontpers', 'TontpersController');
+ });

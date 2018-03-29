@@ -23,7 +23,7 @@ class SessionController extends Controller
 		 }
 			$sessions = Session::all();
 
-			return $this->sendResponse($sessions->toArray(), 'Sessions extraits avec succès.');
+			return $this->sendResponse($sessions->toArray(), 'Sessions extraits avec succï¿½s.');
 		}
 
 		/**
@@ -51,9 +51,9 @@ class SessionController extends Controller
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$session = ::create($input);
+			$session = Session::create($input);
 
-			return $this->sendResponse($session->toArray(), 'Session créé avec succès.');
+			return $this->sendResponse($session->toArray(), 'Session crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -71,10 +71,10 @@ class SessionController extends Controller
 			$session = Session::find($id);
 
 			if (is_null($session)) {
-				return $this->sendError('session non trouvé.');
+				return $this->sendError('session non trouvï¿½.');
 			}
 
-			return $this->sendResponse($session->toArray(), 'session récupér avec succès .');
+			return $this->sendResponse($session->toArray(), 'session rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -110,10 +110,10 @@ class SessionController extends Controller
 				$session->duration = $input['duration'];
 				$session->level = $input['level'];
 				$session->abstract = $input['abstract'];
-				
+
 			 $session->save();
 
-			return $this->sendResponse($session->toArray(), 'Session mis à jour avec succès.');
+			return $this->sendResponse($session->toArray(), 'Session mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -130,6 +130,6 @@ class SessionController extends Controller
 
 			$session->delete();
 
-			return $this->sendResponse($session->toArray(), 'Session supprimé avec succès.');
+			return $this->sendResponse($session->toArray(), 'Session supprimï¿½ avec succï¿½s.');
 		}
 }

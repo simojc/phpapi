@@ -16,18 +16,18 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
 
-			$table->string('name');					
-			$table->string('presenter');	
+			$table->string('name');
+			$table->string('presenter');
 			$table->decimal('duration') ;
-			$table->string('level');	
+			$table->string('level');
 			$table->string('abstract');
-			$table->integer('event_id'); 
+			$table->unsignedInteger('event_id'); 
 
-            $table->timestamps();		 
-				
+            $table->timestamps();
+
 			$table->foreign('event_id')
 			->references('id')->on('events')
-			->onDelete('cascade');			
+			->onDelete('cascade');
         });
     }
 

@@ -23,7 +23,7 @@ class PersController extends Controller
 		 }
 			$perss = Pers::all();
 
-			return $this->sendResponse($perss->toArray(), 'Personnes extraites avec succès.');
+			return $this->sendResponse($perss->toArray(), 'Personnes extraites avec succï¿½s.');
 		}
 
 		/**
@@ -42,22 +42,22 @@ class PersController extends Controller
 			$validator = Validator::make($input, [
 				'user_id'=> 'required',
 				'type'=> 'required',
-				'prenom'=> 'required',	
+				'prenom'=> 'required',
 				'sexe'=> 'required',
 				'email'=> 'required',
 				'telcel'=> 'required',
 				'location_id'=> 'required',
 				'type'=> 'required',
-				'prenom'=> 'required'			
+				'prenom'=> 'required'
 			]);
-			
+
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$pers = ::create($input);
+			$pers = Pers::create($input);
 
-			return $this->sendResponse($pers->toArray(), 'Pers créé avec succès.');
+			return $this->sendResponse($pers->toArray(), 'Pers crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -75,10 +75,10 @@ class PersController extends Controller
 			$pers = Pers::find($id);
 
 			if (is_null($pers)) {
-				return $this->sendError('pers non trouvé.');
+				return $this->sendError('pers non trouvï¿½.');
 			}
 
-			return $this->sendResponse($pers->toArray(), 'pers récupér avec succès .');
+			return $this->sendResponse($pers->toArray(), 'pers rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -100,15 +100,15 @@ class PersController extends Controller
 				$validator = Validator::make($input, [
 				'user_id'=> 'required',
 				'type'=> 'required',
-				'prenom'=> 'required',	
+				'prenom'=> 'required',
 				'sexe'=> 'required',
 				'email'=> 'required',
 				'telcel'=> 'required',
 				'location_id'=> 'required',
 				'type'=> 'required',
-				'prenom'=> 'required'			
+				'prenom'=> 'required'
 			]);
-			
+
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
@@ -116,19 +116,19 @@ class PersController extends Controller
 
 				$pers->user_id = $input['user_id'];
 				$pers->type = $input['type'];
-				$pers->nom = $input['nom'];		
+				$pers->nom = $input['nom'];
 				$pers->prenom = $input['prenom'];
 				$pers->sexe = $input['sexe'];
-				$pers->email = $input['email'];	
+				$pers->email = $input['email'];
 				$pers->telcel = $input['telcel'];
 				$pers->telres = $input['telres'];
-				$pers->location_id = $input['location_id'];	
+				$pers->location_id = $input['location_id'];
 				$pers->emploi = $input['emploi'];
-				$pers->titre_adh = $input['titre_adh'];				
-				
+				$pers->titre_adh = $input['titre_adh'];
+
 				$pers->save();
 
-				return $this->sendResponse($pers->toArray(), 'Pers mis à jour avec succès.');
+				return $this->sendResponse($pers->toArray(), 'Pers mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -145,6 +145,6 @@ class PersController extends Controller
 
 			$pers->delete();
 
-			return $this->sendResponse($pers->toArray(), 'Pers supprimée avec succès.');
+			return $this->sendResponse($pers->toArray(), 'Pers supprimï¿½e avec succï¿½s.');
 		}
 }

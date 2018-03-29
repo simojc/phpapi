@@ -23,7 +23,7 @@ class EvnmtController extends Controller
 		 }
 			$evnmts = Evnmt::all();
 
-			return $this->sendResponse($evnmts->toArray(), 'evnmts extraits avec succès.');
+			return $this->sendResponse($evnmts->toArray(), 'evnmts extraits avec succï¿½s.');
 		}
 
 		/**
@@ -46,16 +46,16 @@ class EvnmtController extends Controller
 				'date'=> 'required',
 				'statut'=> 'required',
 				'hrdeb'=> 'required',
-				'location_id'=> 'required',				
-			]);		
-			
+				'location_id'=> 'required',
+			]);
+
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$evnmts = ::create($input);
+			$evnmts = Evnmt::create($input);
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts créé avec succès.');
+			return $this->sendResponse($evnmts->toArray(), 'Evnmts crï¿½ï¿½ avec succï¿½s.');
 		}
 
 		/**
@@ -73,10 +73,10 @@ class EvnmtController extends Controller
 			$evnmts = Evnmts::find($id);
 
 			if (is_null($evnmts)) {
-				return $this->sendError('evnmts non trouvé.');
+				return $this->sendError('evnmts non trouvï¿½.');
 			}
 
-			return $this->sendResponse($evnmts->toArray(), 'evnmts récupér avec succès .');
+			return $this->sendResponse($evnmts->toArray(), 'evnmts rï¿½cupï¿½r avec succï¿½s .');
 		}
 
 		/**
@@ -102,13 +102,13 @@ class EvnmtController extends Controller
 				'date'=> 'required',
 				'statut'=> 'required',
 				'hrdeb'=> 'required',
-				'location_id'=> 'required',				
-			]);	
+				'location_id'=> 'required',
+			]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
-			
+
 				$evnmts->groupe_id = $input['groupe_id'];
 				$evnmts->nom = $input['nom'];
 				$evnmts->date = $input['date'];
@@ -117,18 +117,18 @@ class EvnmtController extends Controller
 				$evnmts->statut = $input['statut'];
 				$evnmts->descr = $input['descr'];
 				$evnmts->contenu = $input['contenu'];
-				
+
 				$evnmts->location_id = $input['location_id'];
 				$evnmts->rapport = $input['rapport'];
 				$evnmts->resp1 = $input['resp1'];
 				$evnmts->resp2 = $input['resp2'];
 				$evnmts->resp3 = $input['resp3'];
-		
+
 				$evnmts->affich = $input['affich'];
-				
+
 			 $evnmts->save();
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts mis à jour avec succès.');
+			return $this->sendResponse($evnmts->toArray(), 'Evnmts mis ï¿½ jour avec succï¿½s.');
 		}
 
 		/**
@@ -145,7 +145,6 @@ class EvnmtController extends Controller
 
 			$evnmts->delete();
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts supprimé avec succès.');
+			return $this->sendResponse($evnmts->toArray(), 'Evnmts supprimï¿½ avec succï¿½s.');
 		}
 }
-
