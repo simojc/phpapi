@@ -1,13 +1,9 @@
-﻿<?php
-
+<?php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 //use App\Http\Controllers\BaseController as BaseController;
-
 use App\User;
-
 use App\Http\Requests;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use JWTAuth;
@@ -17,6 +13,13 @@ use App\Http\requests\RegisterFormRequest;
 class AuthController extends Controller
 
 {
+      public function index()
+  		 {
+  			$users = User::all();
+  			return $users;
+  			//return $this->sendResponse($events->toArray(), 'Events extraits avec succes.');
+  		}
+
     //The register method  will handle user registrations
       public function register(Request $request)
       {
@@ -33,8 +36,8 @@ class AuthController extends Controller
 
             $user->password = bcrypt($request->password);
 
-			// renseigner le groupe avec une variable globale dans le frontend Angular
-			$user->groupe_id = $request->groupe_id;
+			   // renseigner le groupe avec une variable globale dans le frontend Angular
+			   $user->groupe_id = $request->groupe_id;
 
           if ($user->save()) {
                 $user->signin = [
@@ -64,7 +67,11 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+        //
+        $email = $request->email;
+        $user = new User;
 
+        //echo 'User is ' . $user->first_name . ' ' . $user->last_name;
         $credentials = $request->only('email', 'password');
 
         try {
@@ -73,12 +80,14 @@ class AuthController extends Controller
             }
         } catch (JWTException $e) {
             return response()->json(['msg' => 'Could not create token'], 500);
-        }
+        };
+
+        $user = User::where( 'email', $email )->first();
 
         return response()->json([
-          'status' => 'success','
-          token' => $token]
-        );
+          'status' => 'success','token' => $token, 'user' => $user,
+        ]);
+
 		}
 
       // user method which will return current user information
@@ -91,7 +100,6 @@ class AuthController extends Controller
               ]);
       }
 
-
       //Here is the log-out method which will handle the logout requests.
       public function logout()
       {
@@ -103,15 +111,6 @@ class AuthController extends Controller
       }
 
 
-      // method to check if the current token is valid or not and refresh the token if it is invalid.
-    public function refresh()
-    {
-        return response([
-         'status' => 'success'
-        ]);
-    }
-
-
 	/**
 		 * Update the specified resource in storage.
 		 *
@@ -120,7 +119,7 @@ class AuthController extends Controller
 		 * @return \Illuminate\Http\Response
 		 */
 		//public function update(Request $request, $id)
-		 public function update(Request $request, User $util)
+		public function update(Request $request, User $util)
 		{
 			 if (! $user = JWTAuth::parseToken()->authenticate()) {
 				   return response()->json(['msg' => 'User not found'], 404);
@@ -144,6 +143,27 @@ class AuthController extends Controller
 
 			return $this->sendResponse($util->toArray(), 'User mis a jour avec succes.');
 		}
+
+    public function refreshToken() {
+
+        $token = \JWTAuth::getToken();
+
+        if (! $token) {
+            return response()->json(["error" => 'Token is invalid'], 401);
+        }
+
+        try {
+
+            $refreshedToken = \JWTAuth::refresh($token);
+            $user = \JWTAuth::setToken($refreshedToken)->toUser();
+
+        } catch (JWTException $e) {
+
+            return response()->json(["error" => $e->getMessage()], 400);
+        }
+
+        return response()->json(["token" => $refreshedToken, "user" => $user], 200);
+    }
 
 
 }

@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 // Register route
 Route::post('signup', 'AuthController@register');
 
@@ -28,13 +29,18 @@ Route::group(['middleware' => 'jwt.auth'], function(){
   Route::get('auth/user', 'AuthController@user');
 });
 
+//User route to access current user information
+Route::group(['middleware' => 'jwt.auth'], function(){
+  Route::get('users', 'AuthController@index');
+});
+
 // route to logout
 Route::group(['middleware' => 'jwt.auth'], function(){
    Route::post('auth/logout', 'AuthController@logout');
 });
 
 //route to check the current token is valid or not and refresh the token if it is not invalidated.
-Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh');
+Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refreshToken');
 
 
  Route::group(['middleware' => 'jwt.auth'], function(){
@@ -50,10 +56,11 @@ Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refresh'
    Route::resource('engmtpers', 'EngmtpersController');
  });
 
- Route::group(['middleware' => 'jwt.auth'], function(){
-   Route::resource('events', 'EventController');
- });
+ // Route::group(['middleware' => 'jwt.auth'], function(){
+ //   Route::resource('events', 'EventController');
+ // });
 
+ Route::resource('events', 'EventController');
 
  Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('evnmts', 'EvnmtController');

@@ -18,12 +18,14 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 		 */
 		public function index()
 		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
+		   if (! $user = JWTAuth::parseToken()->authenticate()) {
+			  return response()->json(['msg' => 'User not found'], 404);
 		 }
 			$events = Event::all();
 
-			return $this->sendResponse($events->toArray(), 'Events extraits avec succes.');
+			return $events;
+
+			//return $this->sendResponse($events->toArray(), 'Events extraits avec succes.');
 		}
 
 
