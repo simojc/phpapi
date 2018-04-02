@@ -17,7 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
 // Register route
 Route::post('signup', 'AuthController@register');
 
@@ -30,9 +29,9 @@ Route::group(['middleware' => 'jwt.auth'], function(){
 });
 
 //User route to access current user information
-Route::group(['middleware' => 'jwt.auth'], function(){
+//Route::group(['middleware' => 'jwt.auth'], function(){
   Route::get('users', 'AuthController@index');
-});
+//});
 
 // route to logout
 Route::group(['middleware' => 'jwt.auth'], function(){
