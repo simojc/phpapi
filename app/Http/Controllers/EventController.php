@@ -17,10 +17,10 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 		 * @return \Illuminate\Http\Response
 		 */
 		public function index()
-		 {
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			  return response()->json(['msg' => 'User not found'], 404);
-		 }
+		  {
+					 //   if (! $user = JWTAuth::parseToken()->authenticate()) {
+						//   return response()->json(['msg' => 'User not found'], 404);
+					 // }
 			$events = Event::all();
 
 			return $events;
@@ -67,9 +67,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 		 */
 		public function show($id)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 
 			$event = Event::find($id);
 
