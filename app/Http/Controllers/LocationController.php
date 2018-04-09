@@ -11,70 +11,74 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class LocationController extends BaseController
 {
-    /**
-		 * Display a listing of the resource.
-		 *
-		 * @return \Illuminate\Http\Response
-		 */
-		public function index()
-		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
-		 }
-			$locations = Location::all();
 
-			return $this->sendResponse($locations->toArray(), 'Locations extraits avec succes.');
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	  {
+	 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
+		//  return response()->json(['msg' => 'User not found'], 404);
+	 // }
+		$locations = Location::all();
+		return $locations;
+
+		// return $this->sendResponse($evnmts->toArray(), 'evnmts extraits avec succes.');
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		 // if (! $user = JWTAuth::parseToken()->authenticate()) {
+		 //   return response()->json(['msg' => 'User not found'], 404);
+		 // }
+		$input = $request->all();
+
+		$validator = Validator::make($input, [
+			'address'=> 'required',
+			'city'=> 'required',
+			'country'=> 'required'
+		]);
+
+		if($validator->fails()){
+			return $this->sendError('Validation Error.', $validator->errors());
 		}
 
-		/**
-		 * Store a newly created resource in storage.
-		 *
-		 * @param  \Illuminate\Http\Request  $request
-		 * @return \Illuminate\Http\Response
-		 */
-		public function store(Request $request)
-		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
-			$input = $request->all();
+		$location = Location::create($input);
+		return  $location;
 
-				$validator = Validator::make($input, [
-				'address'=> 'required',
-				'city'=> 'required',
-				'country'=> 'required'
-			]);
+		// return $this->sendResponse($evnmts->toArray(), 'Evnmts cree avec succes.');
+	}
 
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id)
+	{
+		 // if (! $user = JWTAuth::parseToken()->authenticate()) {
+		 //   return response()->json(['msg' => 'User not found'], 404);
+		 // }
 
-			if($validator->fails()){
-				return $this->sendError('Validation Error.', $validator->errors());
-			}
+		$location = Location::find($id);
 
-			$location = Location::create($input);
-
-			return $this->sendResponse($location->toArray(), 'Location cree avec succes.');
+		if (is_null($location)) {
+			return $this->sendError('evnmt non trouve.');
 		}
+		return $location;
+		// return $this->sendResponse($evnmts->toArray(), 'evnmts recuper avec succes .');
+	}
 
-		/**
-		 * Display the specified resource.
-		 *
-		 * @param  int  $id
-		 * @return \Illuminate\Http\Response
-		 */
-		public function show($id)
-		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
 
-			$location = Location::find($id);
-
-			if (is_null($location)) {
-				return $this->sendError('location non trouve.');
-			}
-
-			return $this->sendResponse($location->toArray(), 'location recuper avec succes .');
-		}
 
 		/**
 		 * Update the specified resource in storage.
@@ -86,9 +90,9 @@ class LocationController extends BaseController
 		//public function update(Request $request, $id)
 		 public function update(Request $request, Location $location)
 		{
-			 if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			   }
+			 // if (! $user = JWTAuth::parseToken()->authenticate()) {
+				//    return response()->json(['msg' => 'User not found'], 404);
+			 //   }
 
 			$input = $request->all();
 
@@ -109,7 +113,9 @@ class LocationController extends BaseController
 
 			 $location->save();
 
-			return $this->sendResponse($location->toArray(), 'Location mis a jour avec succes.');
+			 return $location;
+
+			// return $this->sendResponse($location->toArray(), 'Location mis a jour avec succes.');
 		}
 
 		/**
@@ -120,9 +126,9 @@ class LocationController extends BaseController
 		 */
 		public function destroy(Location $location)
 		{
-			if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			}
+			// if (! $user = JWTAuth::parseToken()->authenticate()) {
+			// 	   return response()->json(['msg' => 'User not found'], 404);
+			// }
 
 			$location->delete();
 

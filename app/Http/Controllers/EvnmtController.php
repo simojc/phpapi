@@ -17,13 +17,14 @@ class EvnmtController extends BaseController
 		 * @return \Illuminate\Http\Response
 		 */
 		public function index()
-		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
-		 }
+		  {
+		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
+			//  return response()->json(['msg' => 'User not found'], 404);
+		 // }
 			$evnmts = Evnmt::all();
+			return $evnmts;
 
-			return $this->sendResponse($evnmts->toArray(), 'evnmts extraits avec succes.');
+			// return $this->sendResponse($evnmts->toArray(), 'evnmts extraits avec succes.');
 		}
 
 		/**
@@ -34,9 +35,9 @@ class EvnmtController extends BaseController
 		 */
 		public function store(Request $request)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 			$input = $request->all();
 
 			$validator = Validator::make($input, [
@@ -53,9 +54,10 @@ class EvnmtController extends BaseController
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$evnmts = Evnmt::create($input);
+			$evnmt = Evnmt::create($input);
+			return  $evnmt;
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts cree avec succes.');
+			// return $this->sendResponse($evnmts->toArray(), 'Evnmts cree avec succes.');
 		}
 
 		/**
@@ -66,17 +68,17 @@ class EvnmtController extends BaseController
 		 */
 		public function show($id)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 
-			$evnmts = Evnmts::find($id);
+			$evnmt = Evnmt::find($id);
 
-			if (is_null($evnmts)) {
-				return $this->sendError('evnmts non trouve.');
+			if (is_null($evnmt)) {
+				return $this->sendError('evnmt non trouve.');
 			}
-
-			return $this->sendResponse($evnmts->toArray(), 'evnmts recuper avec succes .');
+			return $evnmt;
+			// return $this->sendResponse($evnmts->toArray(), 'evnmts recuper avec succes .');
 		}
 
 		/**
@@ -87,11 +89,11 @@ class EvnmtController extends BaseController
 		 * @return \Illuminate\Http\Response
 		 */
 		//public function update(Request $request, $id)
-		 public function update(Request $request, Evnmts $evnmts)
+		 public function update(Request $request, Evnmt $evnmt)
 		{
-			 if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			   }
+			 // if (! $user = JWTAuth::parseToken()->authenticate()) {
+				//    return response()->json(['msg' => 'User not found'], 404);
+			 //   }
 
 			$input = $request->all();
 
@@ -109,26 +111,27 @@ class EvnmtController extends BaseController
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-				$evnmts->groupe_id = $input['groupe_id'];
-				$evnmts->nom = $input['nom'];
-				$evnmts->date = $input['date'];
-				$evnmts->hrdeb = $input['hrdeb'];
-				$evnmts->hrfin = $input['hrfin'];
-				$evnmts->statut = $input['statut'];
-				$evnmts->descr = $input['descr'];
-				$evnmts->contenu = $input['contenu'];
+				$evnmt->groupe_id = $input['groupe_id'];
+				$evnmt->nom = $input['nom'];
+				$evnmt->hrdeb = $input['hrdeb'];
+				$evnmt->hrfin = $input['hrfin'];
+				$evnmt->statut = $input['statut'];
+				$evnmt->descr = $input['descr'];
+				$evnmt->contenu = $input['contenu'];
 
-				$evnmts->location_id = $input['location_id'];
-				$evnmts->rapport = $input['rapport'];
-				$evnmts->resp1 = $input['resp1'];
-				$evnmts->resp2 = $input['resp2'];
-				$evnmts->resp3 = $input['resp3'];
+				$evnmt->location_id = $input['location_id'];
+				$evnmt->rapport = $input['rapport'];
+				$evnmt->resp1 = $input['resp1'];
+				$evnmt->resp2 = $input['resp2'];
+				$evnmt->resp3 = $input['resp3'];
 
-				$evnmts->affich = $input['affich'];
+				$evnmt->affich = $input['affich'];
 
-			 $evnmts->save();
+			 $evnmt->save();
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts mis a jour avec succes.');
+			 return $evnmt;
+
+			// return $this->sendResponse($evnmts->toArray(), 'Evnmts mis a jour avec succes.');
 		}
 
 		/**
@@ -137,14 +140,14 @@ class EvnmtController extends BaseController
 		 * @param  int  $id
 		 * @return \Illuminate\Http\Response
 		 */
-		public function destroy(Evnmts $evnmts)
+		public function destroy(Evnmt $evnmt)
 		{
-			if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			}
+			// if (! $user = JWTAuth::parseToken()->authenticate()) {
+			// 	   return response()->json(['msg' => 'User not found'], 404);
+			// }
 
-			$evnmts->delete();
+			$evnmt->delete();
 
-			return $this->sendResponse($evnmts->toArray(), 'Evnmts supprime avec succes.');
+			return $this->sendResponse($evnmt->toArray(), 'Evnmt supprime avec succes.');
 		}
 }

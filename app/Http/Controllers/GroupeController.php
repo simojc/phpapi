@@ -18,12 +18,14 @@ class GroupeController extends BaseController
 		 */
 		public function index()
 		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
-		 }
+		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
+			//  return response()->json(['msg' => 'User not found'], 404);
+		 // }
 			$groupes = Groupe::all();
 
-			return $this->sendResponse($groupes->toArray(), 'Groupes extraits avec succes.');
+			return  $groupes;
+
+			// return  $this->sendResponse($groupes->toArray(), 'Groupes extraits avec succes.');
 		}
 
 		/**
@@ -34,9 +36,9 @@ class GroupeController extends BaseController
 		 */
 		public function store(Request $request)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 			$input = $request->all();
 
 				$validator = Validator::make($input, [
@@ -56,8 +58,9 @@ class GroupeController extends BaseController
 			}
 
 			$groupe = Groupe::create($input);
+			return $groupe;
 
-			return $this->sendResponse($groupe->toArray(), 'Groupe cree avec succes.');
+			// return $this->sendResponse($groupe->toArray(), 'Groupe cree avec succes.');
 		}
 
 		/**
@@ -68,15 +71,17 @@ class GroupeController extends BaseController
 		 */
 		public function show($id)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 
 			$groupe = Groupe::find($id);
 
 			if (is_null($groupe)) {
 				return $this->sendError('groupe non trouve.');
 			}
+
+				return $groupe;
 
 			return $this->sendResponse($groupe->toArray(), 'groupe recuper avec succes .');
 		}
@@ -140,12 +145,12 @@ class GroupeController extends BaseController
 		 */
 		public function destroy(Groupe $groupe)
 		{
-			if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			}
+			// if (! $user = JWTAuth::parseToken()->authenticate()) {
+			// 	   return response()->json(['msg' => 'User not found'], 404);
+			// }
 
 			$groupe->delete();
 
-			return $this->sendResponse($groupe->toArray(), 'Groupe supprime avec succes.');
+			 return $this->sendResponse($groupe->toArray(), 'Groupe supprime avec succes.');
 		}
 }

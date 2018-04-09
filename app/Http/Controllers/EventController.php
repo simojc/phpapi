@@ -37,9 +37,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 		 */
 		public function store(Request $request)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 			$input = $request->all();
 
 			$validator = Validator::make($input, [
@@ -55,7 +55,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 			}
 
 			$event = Event::create($input);
-
+			//return $event;
 			return $this->sendResponse($event->toArray(), 'Event cree avec succes.');
 		}
 
@@ -70,14 +70,13 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
 			 //   return response()->json(['msg' => 'User not found'], 404);
 		   // }
-
 			$event = Event::find($id);
 
 			if (is_null($event)) {
 				return $this->sendError('event non trouve.');
 			}
 
-			return $this->sendResponse($event->toArray(), 'event recuper avec succes .');
+			return $event;
 		}
 
 		/**
@@ -90,9 +89,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 		//public function update(Request $request, $id)
 		 public function update(Request $request, Event $event)
 		{
-			 if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			   }
+			 // if (! $user = JWTAuth::parseToken()->authenticate()) {
+				//    return response()->json(['msg' => 'User not found'], 404);
+			 //   }
 
 			$input = $request->all();
 
@@ -118,7 +117,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 			 $event->save();
 
-			return $this->sendResponse($event->toArray(), 'Event mis a jour avec succes.');
+			 return $event;
+
+			// return $this->sendResponse($event->toArray(), 'Event mis a jour avec succes.');
 		}
 
 		/**
@@ -129,9 +130,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 		 */
 		public function destroy(Event $event)
 		{
-			if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			}
+			// if (! $user = JWTAuth::parseToken()->authenticate()) {
+			// 	   return response()->json(['msg' => 'User not found'], 404);
+			// }
 
 			$event->delete();
 

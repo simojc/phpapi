@@ -61,17 +61,17 @@ Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refreshT
 
  Route::resource('events', 'EventController');
 
- Route::group(['middleware' => 'jwt.auth'], function(){
+ //Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('evnmts', 'EvnmtController');
- });
+ //});
 
- Route::group(['middleware' => 'jwt.auth'], function(){
+ //Route::group(['middleware' => 'jwt.auth'], function(){
     Route::resource('groupes', 'GroupeController');
- });
+// });
 
- Route::group(['middleware' => 'jwt.auth'], function(){
+ //Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('locations', 'LocationController');
- });
+ //});
 
  Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('pers', 'PersController');

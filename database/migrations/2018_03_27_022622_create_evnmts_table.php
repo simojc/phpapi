@@ -14,22 +14,22 @@ class CreateEvnmtsTable extends Migration
     public function up()
     {
         Schema::create('evnmts', function (Blueprint $table) {
-            $table->increments('id');
+        $table->increments('id');
 
-			$table->unsignedInteger('groupe_id');
-			$table->string('nom');
-			$table->dateTime('date');
-			$table->dateTime('hrdeb');
-			$table->dateTime('hrfin');
-			$table->string('statut');
-			$table->string('descr');			// (longue description , famille acueil, tout autres info pertinantes)
-			$table->text('contenu');
-			$table->unsignedInteger('location_id'); 				  /// Adresse du groupe	  FK vers location
-			$table->string('rapport');			//(nom du fichier ....rapport)
-			$table->integer('resp1')->nullable();	;			//(pers_id)
-			$table->integer('resp2')->nullable();	;		 	//(pers_id)
-			$table->integer('resp3')->nullable();	;			 //(pers_id)
-			$table->boolean('affich');		 	//(affiche cet evnmt dans la page d'acceuile? Oui/Non)
+  			$table->unsignedInteger('groupe_id');
+  			$table->string('nom');
+  			$table->dateTime('date');
+  			$table->string('hrdeb');
+  			$table->string('hrfin');
+  			$table->string('statut');
+  			$table->string('descr');			// (longue description , famille acueil, tout autres info pertinantes)
+  			$table->text('contenu');
+  			$table->unsignedInteger('location_id'); 				  /// Adresse du groupe	  FK vers location
+  			$table->string('rapport');			//(nom du fichier ....rapport)
+  			$table->string('famaccueil')->nullable();	;			//(pers_id)
+  			$table->integer('resp1')->nullable();	;		 	//(pers_id)
+  			$table->integer('resp2')->nullable();	;			 //(pers_id)
+  			$table->boolean('affich');		 	//(affiche cet evnmt dans la page d'acceuile? Oui/Non)
 
 				//Contraintes
 			//$table->primary('id');
