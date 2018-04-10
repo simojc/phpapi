@@ -18,12 +18,13 @@ class PersController extends BaseController
 		 */
 		public function index()
 		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
-		 }
+		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
+			//  return response()->json(['msg' => 'User not found'], 404);
+		 // }
 			$perss = Pers::all();
 
-			return $this->sendResponse($perss->toArray(), 'Personnes extraites avec succes.');
+			return  $perss;
+			//$this->sendResponse($perss->toArray(), 'Personnes extraites avec succes.');
 		}
 
 		/**
@@ -34,9 +35,9 @@ class PersController extends BaseController
 		 */
 		public function store(Request $request)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 			$input = $request->all();
 
 			$validator = Validator::make($input, [
@@ -68,9 +69,9 @@ class PersController extends BaseController
 		 */
 		public function show($id)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 
 			$pers = Pers::find($id);
 
@@ -78,7 +79,20 @@ class PersController extends BaseController
 				return $this->sendError('pers non trouve.');
 			}
 
-			return $this->sendResponse($pers->toArray(), 'pers recuper avec succes .');
+			return $pers;
+			//$this->sendResponse($pers->toArray(), 'pers recuper avec succes .');
+		}
+
+		public function getPersByMail($mail)
+		{
+			$pers = Pers::where( 'email', $email )->first();
+
+			if (is_null($pers)) {
+				return $this->sendError('pers non trouve.');
+			}
+
+			return  $pers;
+			//$this->sendResponse($pers->toArray(), 'pers recuper avec succes .');
 		}
 
 		/**
