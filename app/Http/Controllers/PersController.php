@@ -16,7 +16,7 @@ class PersController extends BaseController
 		 *
 		 * @return \Illuminate\Http\Response
 		 */
-		public function index()
+		public function index1()
 		 {
 		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
 			//  return response()->json(['msg' => 'User not found'], 404);
@@ -58,7 +58,8 @@ class PersController extends BaseController
 
 			$pers = Pers::create($input);
 
-			return $this->sendResponse($pers->toArray(), 'Pers cree avec succes.');
+			return 	$pers;
+			//$this->sendResponse($pers->toArray(), 'Pers cree avec succes.');
 		}
 
 		/**
@@ -83,7 +84,13 @@ class PersController extends BaseController
 			//$this->sendResponse($pers->toArray(), 'pers recuper avec succes .');
 		}
 
-		public function getPersByMail($mail)
+		/**
+		 * Display the specified resource.
+		 *
+		 * @param  int  $mail
+		 * @return \Illuminate\Http\Response
+		 */
+		public function personnes($mail)
 		{
 			$pers = Pers::where( 'email', $email )->first();
 
@@ -99,15 +106,15 @@ class PersController extends BaseController
 		 * Update the specified resource in storage.
 		 *
 		 * @param  \Illuminate\Http\Request  $request
-		 * @param  int  $id
+		 * @param  Pers $pers
 		 * @return \Illuminate\Http\Response
 		 */
 		//public function update(Request $request, $id)
 		 public function update(Request $request, Pers $pers)
 		{
-			 if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			   }
+			 // if (! $user = JWTAuth::parseToken()->authenticate()) {
+				//    return response()->json(['msg' => 'User not found'], 404);
+			 //   }
 
 			$input = $request->all();
 
@@ -148,14 +155,14 @@ class PersController extends BaseController
 		/**
 		 * Remove the specified resource from storage.
 		 *
-		 * @param  int  $id
+		 * @param  Pers $pers
 		 * @return \Illuminate\Http\Response
 		 */
 		public function destroy(Pers $pers)
 		{
-			if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			}
+			// if (! $user = JWTAuth::parseToken()->authenticate()) {
+			// 	   return response()->json(['msg' => 'User not found'], 404);
+			// }
 
 			$pers->delete();
 
