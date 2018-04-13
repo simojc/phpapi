@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use DB;
+
 use Illuminate\Http\Request;
 //use App\Http\Controllers\BaseController as BaseController;
 use App\User;
@@ -14,13 +16,24 @@ class AuthController extends Controller
 
 {
       public function index()
-  		 {
-  			$users = User::all();
-  			return $users;
-  			//return $this->sendResponse($events->toArray(), 'Events extraits avec succes.');
-  		}
+		 {
+			//$users1 = User::all();
 
-    //The register method  will handle user registrations
+      //$users3 = DB::table('users')->get();
+
+      $users = DB::select("SELECT
+               users.name, users.email, users.admin, users.groupe_id,
+               groupes.nom, groupes.descr
+               FROM users
+               LEFT JOIN groupes
+               ON groupes.id = users.groupe_id");
+       //WHERE hash_card NOT IN ( SELECT orders.hash_card FROM orders )
+
+			return $users;
+			 //return $this->sendResponse($events->toArray(), 'Events extraits avec succes.');
+		}
+
+     //The register method  will handle user registrations
       public function register(Request $request)
       {
         $this->validate($request, [

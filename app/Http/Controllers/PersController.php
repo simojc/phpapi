@@ -16,7 +16,7 @@ class PersController extends BaseController
 		 *
 		 * @return \Illuminate\Http\Response
 		 */
-		public function index1()
+		public function index()
 		 {
 		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
 			//  return response()->json(['msg' => 'User not found'], 404);
@@ -68,7 +68,7 @@ class PersController extends BaseController
 		 * @param  int  $id
 		 * @return \Illuminate\Http\Response
 		 */
-		public function show($id)
+		public function show1($id)
 		{
 		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
 			 //   return response()->json(['msg' => 'User not found'], 404);
@@ -90,7 +90,7 @@ class PersController extends BaseController
 		 * @param  int  $mail
 		 * @return \Illuminate\Http\Response
 		 */
-		public function personnes($mail)
+		public function show($mail)
 		{
 			$pers = Pers::where( 'email', $email )->first();
 

@@ -76,9 +76,9 @@ class EngmtController extends BaseController
 		 */
 		public function show($id)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 
 			$engmt = Engmt::find($id);
 
