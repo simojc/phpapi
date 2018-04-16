@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
@@ -18,12 +19,13 @@ class RpnpersController extends BaseController
 		 */
 		public function index()
 		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
-		 }
+		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
+			//  return response()->json(['msg' => 'User not found'], 404);
+		 // }
 			$rpnperss = Rpnpers::all();
 
-			return $this->sendResponse($rpnperss->toArray(), 'Rpnpersonnes extraites avec succes.');
+			return 	$rpnperss;
+			// $this->sendResponse($rpnperss->toArray(), 'Rpnpersonnes extraites avec succes.');
 		}
 
 		/**
@@ -66,17 +68,26 @@ class RpnpersController extends BaseController
 		 */
 		public function show($id)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
 
-			$rpnpers = Rpnpers::find($id);
+			$rpnpers = DB::select("
+					SELECT
+						rpnpers.*, CONCAT(personne.nom , ' ', personne.prenom) nom_pers,
+						personne.prenom prenom_pers,
+						CONCAT(repdt.nom , ' ', repdt.prenom) nom_repdt, repdt.prenom prenom_repdt
+					FROM rpnpers
+					LEFT JOIN pers as personne ON personne.id = rpnpers.pers_id
+					LEFT JOIN pers as repdt ON repdt.id = rpnpers.repdt_id
+					WHERE rpnpers.repdt_id = $id");
+
+			$rpnpers1 = rpnpers::where( 'repdt_id', $id )->get();
+		// 	$tontpers = Tontpers::find($id);
 
 			if (is_null($rpnpers)) {
 				return $this->sendError('rpnpers non trouve.');
 			}
 
-			return $this->sendResponse($rpnpers->toArray(), 'rpnpers recuper avec succes .');
+			return $rpnpers;
+			//$this->sendResponse($rpnpers->toArray(), 'rpnpers recuper avec succes .');
 		}
 
 		/**

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
@@ -18,12 +19,9 @@ class TontpersController extends BaseController
 		 */
 		public function index()
 		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
-		 }
-			$tontperss = Tontpers::all();
-
-			return $this->sendResponse($tontperss->toArray(), 'Tontperss extraits avec succes.');
+  	 		$tontperss = Tontpers::all();
+			return $tontperss;
+			//$this->sendResponse($tontperss->toArray(), 'Tontperss extraits avec succes.');
 		}
 
 		/**
@@ -66,17 +64,14 @@ class TontpersController extends BaseController
 		 */
 		public function show($id)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
-
-			$tontpers = Tontpers::find($id);
-
+			$tontperss = tontpers::where( 'repdt_id', $id )->all();
+		// 	$tontpers = Tontpers::find($id);
 			if (is_null($tontpers)) {
 				return $this->sendError('tontpers non trouve.');
 			}
 
-			return $this->sendResponse($tontpers->toArray(), 'tontpers recuper avec succes .');
+			return $tontpers;
+			// $this->sendResponse($tontpers->toArray(), 'tontpers recuper avec succes .');
 		}
 
 		/**

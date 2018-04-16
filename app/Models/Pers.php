@@ -16,13 +16,13 @@ class Pers extends Model
 				'telres',
 				'emploi',
 				'dom_activ',
-				'titre_adh',   
-				]
-	
+				'titre_adh',
+      ];
+
 
 		public function engmtpers()
- 		{ 
-			return $this->hasMany('App\Models\Engmtpers'); 
+ 		{
+			return $this->hasMany('App\Models\Engmtpers');
 		}
 
 		public function location()
@@ -36,18 +36,13 @@ class Pers extends Model
 		}
 
 		public function tontpers()
- 		{ 
-			return $this->hasMany('App\Models\Tontpers'); 
+ 		{
+			return $this->hasMany('App\Models\Tontpers');
 		}
 
 		public function rpnpers()
- 		{ 
-			return $this->hasMany('App\Models\Rpnpers'); 
-		}
-
-		public function engmtpers()
- 		{ 
-			return $this->hasMany('App\Models\Engmtpers'); 
+ 		{
+			return $this->hasMany('App\Models\Rpnpers');
 		}
 
 }

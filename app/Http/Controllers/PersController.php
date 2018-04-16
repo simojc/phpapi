@@ -16,13 +16,23 @@ class PersController extends BaseController
 		 *
 		 * @return \Illuminate\Http\Response
 		 */
-		public function index()
+		public function index(Request $request)
 		 {
-		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			//  return response()->json(['msg' => 'User not found'], 404);
-		 // }
-			$perss = Pers::all();
 
+			 $input = $request->all();
+
+			 	$email = $input['email'];
+
+			 if (is_null($email)) {
+				 		$perss = Pers::all();
+		 }
+		 else {
+			 		$perss = Pers::where( 'email', $email )->first();
+			}
+
+			if (is_null($perss)) {
+				return $this->sendError('pers non trouve.');
+			}
 			return  $perss;
 			//$this->sendResponse($perss->toArray(), 'Personnes extraites avec succes.');
 		}
@@ -68,7 +78,7 @@ class PersController extends BaseController
 		 * @param  int  $id
 		 * @return \Illuminate\Http\Response
 		 */
-		public function show1($id)
+		public function show($id)
 		{
 		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
 			 //   return response()->json(['msg' => 'User not found'], 404);
@@ -90,7 +100,7 @@ class PersController extends BaseController
 		 * @param  int  $mail
 		 * @return \Illuminate\Http\Response
 		 */
-		public function show($mail)
+		public function show2($mail)
 		{
 			$pers = Pers::where( 'email', $email )->first();
 

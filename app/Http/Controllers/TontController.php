@@ -18,9 +18,9 @@ class TontController extends BaseController
 		 */
 		public function index()
 		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
-		 }
+		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
+			//  return response()->json(['msg' => 'User not found'], 404);
+		 // }
 			$tonts = Tont::all();
 
 			return $this->sendResponse($tonts->toArray(), 'Tonts extraits avec succes.');
@@ -34,9 +34,7 @@ class TontController extends BaseController
 		 */
 		public function store(Request $request)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+
 			$input = $request->all();
 
 			$validator = Validator::make($input, [

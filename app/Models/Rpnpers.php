@@ -11,26 +11,26 @@ class Rpnpers extends Model
 			'mtrle',
 			'depot',
 			'dtmajdpt',
-			]
-	
+    ];
 
-		public function groupe() 
+
+		public function groupe()
 		{
-			// return $this->belongsTo('App\Models\Groupe’); 
-			  return $this->belongsTo(Groupe::class); 
-		};
+			// return $this->belongsTo('App\Models\Groupeï¿½);
+			  return $this->belongsTo(Groupe::class);
+		}
 
-		public function pers() 
+		public function pers()
 		{
-			// return $this->belongsTo('App\Models\Pers’); 
-			  return $this->belongsTo(Pers::class); 
-		};
+			// return $this->belongsTo('App\Models\Persï¿½);
+			  return $this->belongsTo(Pers::class);
+		}
 
-		public function repdnt() 
+		public function repdnt()
 		{
 		// return $this->belongsTo('App\User', 'foreign_key');
-			return $this->belongsTo('App\Models\Pers', 'repdt_id'); 
-			  //return $this->belongsTo(Pers::class, 'repdt_id'); 
-		};
+			return $this->belongsTo('App\Models\Pers', 'repdt_id');
+			  //return $this->belongsTo(Pers::class, 'repdt_id');
+		}
 
 }

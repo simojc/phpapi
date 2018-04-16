@@ -18,9 +18,9 @@ class EngmtpersController extends BaseController
 		 */
 		public function index()
 		 {
-		  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 return response()->json(['msg' => 'User not found'], 404);
-		 }
+		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
+			//  return response()->json(['msg' => 'User not found'], 404);
+		 // }
 			$engmtpers = Engmtpers::all();
 
 			return $this->sendResponse($engmtpers->toArray(), 'Engmtpers extraits avec succes.');
