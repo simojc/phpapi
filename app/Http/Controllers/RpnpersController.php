@@ -79,7 +79,7 @@ class RpnpersController extends BaseController
 					LEFT JOIN pers as repdt ON repdt.id = rpnpers.repdt_id
 					WHERE rpnpers.repdt_id = $id");
 
-			$rpnpers1 = rpnpers::where( 'repdt_id', $id )->get();
+			//$rpnpers1 = rpnpers::where( 'repdt_id', $id )->get();
 		// 	$tontpers = Tontpers::find($id);
 
 			if (is_null($rpnpers)) {

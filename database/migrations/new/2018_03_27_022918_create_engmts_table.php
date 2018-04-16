@@ -23,6 +23,7 @@ class CreateEngmtsTable extends Migration
       $table->string('statut');   ///--- valeurs: En cours, e venir, ferme selon la periode
       $table->integer('mont_unit');
       $table->integer('totalper');   /// solde periode
+	   $table->dateTime('dt_ech');
       //contraintes
       //$table->primary('id');
       $table->foreign('groupe_id')

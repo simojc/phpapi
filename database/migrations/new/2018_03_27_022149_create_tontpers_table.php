@@ -23,6 +23,7 @@ class CreateTontpersTable extends Migration
 			$table->string('statut');			  //(bouffe / non bouffe)
 			$table->string('comment');
 			$table->dateTime('dt_statut');
+			$table->string('moisgain');
 
 			//Contraintes
 		//	$table->primary('id');

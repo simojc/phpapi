@@ -25,8 +25,8 @@ class PersController extends BaseController
 
 			 if (is_null($email)) {
 				 		$perss = Pers::all();
-		 }
-		 else {
+				}
+			else {
 			 		$perss = Pers::where( 'email', $email )->first();
 			}
 

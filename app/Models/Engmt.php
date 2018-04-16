@@ -10,7 +10,7 @@ class Engmt extends Model
 		   protected $fillable = [
 			'nom', 'descr', 'periodicite',
 			'periode', 'statut', 'mont_unit',
-			'totalper',
+			'totalper','dt_ech'
 		];
 
 		public function groupe()

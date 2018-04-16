@@ -11,9 +11,8 @@ class Tontpers extends Model
 			'alias',   	// Pour gérer les cas des personnes qui auront plus d'un nom inscrit	
 			'statut',
 			'dt_statut',
-			'imageUrl',    
-			'onlineUrl',   
-		]
+			'moisgain '
+		];
 	
 		public function tont() 
 		{

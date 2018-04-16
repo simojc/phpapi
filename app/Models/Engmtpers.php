@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Engmtpers extends Model
 {
  protected $fillable = [
-    'exercice','mont','statut', 'dtchgst','message','dt_ech',
+    'exercice','mont','statut', 'dtchgst','message',
 	]
 
 	//Les infos à afficher sont: montant payé, mt restant, statu, un essage

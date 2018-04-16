@@ -64,7 +64,23 @@ class TontpersController extends BaseController
 		 */
 		public function show($id)
 		{
-			$tontperss = tontpers::where( 'repdt_id', $id )->all();
+			$tontpers = DB::select("			
+				SELECT 	tontpers.*			
+						tonts.nom,
+						tonts.descr,
+						tonts.mtpart,
+						tonts.groupe_id,
+						tonts.dtdeb,
+						tonts.dtfin,
+						tonts.cot_dern	,
+						CONCAT(pers.nom , ' ', pers.prenom) nom_prenom				
+			FROM	tontpers
+			LETF JOIN tonts ON tonts.id = tontpers.tont_id
+			WHERE tontpers.pers_id = $id ");
+			
+			//and tonts.groupe_id = $groupe_id
+	
+			$tontpers1 = tontpers::where( 'repdt_id', $id )->all();
 		// 	$tontpers = Tontpers::find($id);
 			if (is_null($tontpers)) {
 				return $this->sendError('tontpers non trouve.');

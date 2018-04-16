@@ -22,8 +22,7 @@ class CreateEngmtpersTable extends Migration
       $table->integer('mont');
       $table->string('statut');
       $table->string('dtchgst');
-      $table->string('message');
-      $table->dateTime('dt_ech');
+      $table->string('message');     
       //$table->primary('id');
       $table->foreign('engmt_id')
       ->references('id')->on('engmts')

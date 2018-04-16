@@ -76,18 +76,32 @@ class EngmtpersController extends BaseController
 		 * @return \Illuminate\Http\Response
 		 */
 		public function show($id)
-		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		{		  
+			$engmtpers = DB::select("
+					SELECT 	engmtpers.*,
+							engmts.groupe_id,			
+							engmts.nom as nom_engmt,
+							engmts.descr,
+							engmts.periodicite,
+							engmts.periode,
+							engmts.statut as stat_engmt,
+							engmts.mont_unit,
+							engmts.dt_ech,
+							CONCAT(pers.nom , ' ', pers.prenom) nom_prenom						
+					FROM	engmtpers
+					LETF JOIN engmts ON engmts.id = engmtpers.engmt_id
+					LEFT JOIN pers  ON pers.id = engmtpers.pers_id
+					WHERE engmtpers.pers_id = $id ");
+					
+			//and engmts.groupe_id = $groupe_id
 
-			$engmtpers = Engmtpers::find($id);
+			//$engmtpers = Engmtpers::find($id);
 
 			if (is_null($engmtpers)) {
 				return $this->sendError('engmtpers non trouve.');
 			}
 
-			return $this->sendResponse($engmtpers->toArray(), 'engmtpers recuper avec succes .');
+			return $engmtpers;			
 		}
 
 		/**
