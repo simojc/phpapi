@@ -22,19 +22,30 @@ class PersController extends BaseController
 			 $input = $request->all();
 
 			 	$email = $input['email'];
-
-			 if (is_null($email)) {
-				 		$perss = Pers::all();
-				}
-			else {
+				
+				$type = $input['type'];
+				
+				if (!is_null($email)) {		
 			 		$perss = Pers::where( 'email', $email )->first();
-			}
-
-			if (is_null($perss)) {
-				return $this->sendError('pers non trouve.');
-			}
-			return  $perss;
-			//$this->sendResponse($perss->toArray(), 'Personnes extraites avec succes.');
+				}
+				
+				if (!is_null($type)) {	
+					//$perss = Pers::where( 'type', $type )->first();
+					
+					$perss = DB::select("
+					SELECT
+						pers.*, CONCAT(pers.nom , ' ', pers.prenom) nom_pers,
+						CONCAT(locations.address , ' ',	locations.city, ' ',locations.country) location															
+					FROM pers
+					LEFT JOIN locations ON locations.id = pers.location_id					
+					WHERE UPPER(substr(pers.type,1,1)) = $type");
+				}
+			
+				if (is_null($perss)) {
+					return $this->sendError('pers non trouve.');
+				}
+	
+				return  $perss;
 		}
 
 		/**
