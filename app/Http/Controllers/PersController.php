@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
@@ -19,32 +20,35 @@ class PersController extends BaseController
 		public function index(Request $request)
 		 {
 
-			 $input = $request->all();
+		$type = $request->input('type', '1');
 
-			 	$email = $input['email'];
-				
-				$type = $input['type'];
-				
-				if (!is_null($email)) {		
+			$email = $request->input('email','1');
+
+			// $input = $request->all();
+
+			 //	$email = $input['email'];
+			//	if (!is_null($email)) {
+			if (($type == '1') && ($email != '1')) {
 			 		$perss = Pers::where( 'email', $email )->first();
 				}
-				
-				if (!is_null($type)) {	
+
+			//	if (!is_null($type)) {
 					//$perss = Pers::where( 'type', $type )->first();
-					
+
+	    else {
 					$perss = DB::select("
 					SELECT
 						pers.*, CONCAT(pers.nom , ' ', pers.prenom) nom_pers,
-						CONCAT(locations.address , ' ',	locations.city, ' ',locations.country) location															
+						CONCAT(locations.address , ' ',	locations.city, ' ',locations.country) location
 					FROM pers
-					LEFT JOIN locations ON locations.id = pers.location_id					
+					LEFT JOIN locations ON locations.id = pers.location_id
 					WHERE UPPER(substr(pers.type,1,1)) = $type");
 				}
-			
+
 				if (is_null($perss)) {
 					return $this->sendError('pers non trouve.');
 				}
-	
+
 				return  $perss;
 		}
 

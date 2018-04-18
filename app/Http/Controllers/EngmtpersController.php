@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
@@ -34,9 +35,7 @@ class EngmtpersController extends BaseController
 		 */
 		public function store(Request $request)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+
 			$input = $request->all();
 
 			$validator = Validator::make($input, [
@@ -49,16 +48,6 @@ class EngmtpersController extends BaseController
 				'message'=> 'required',
 				'dt_ech'=> 'required'
 			]);
-
-			// $table->integer('engmt_id');
-			// $table->integer('pers_id');		  // (fk vers table personne; contrainte: la personne doit etre de type membre)
-			// $table->integer('exercice');
-			// $table->integer('mont');
-			// $table->string('statut');
-			// $table->string('dtchgst');
-			// $table->string('message');
-			// $table->dateTime('dt_ech');
-
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
@@ -76,10 +65,10 @@ class EngmtpersController extends BaseController
 		 * @return \Illuminate\Http\Response
 		 */
 		public function show($id)
-		{		  
+		{
 			$engmtpers = DB::select("
 					SELECT 	engmtpers.*,
-							engmts.groupe_id,			
+							engmts.groupe_id,
 							engmts.nom as nom_engmt,
 							engmts.descr,
 							engmts.periodicite,
@@ -87,12 +76,12 @@ class EngmtpersController extends BaseController
 							engmts.statut as stat_engmt,
 							engmts.mont_unit,
 							engmts.dt_ech,
-							CONCAT(pers.nom , ' ', pers.prenom) nom_prenom						
+							CONCAT(pers.nom , ' ', pers.prenom) nom_prenom
 					FROM	engmtpers
 					LETF JOIN engmts ON engmts.id = engmtpers.engmt_id
 					LEFT JOIN pers  ON pers.id = engmtpers.pers_id
 					WHERE engmtpers.pers_id = $id ");
-					
+
 			//and engmts.groupe_id = $groupe_id
 
 			//$engmtpers = Engmtpers::find($id);
@@ -101,7 +90,7 @@ class EngmtpersController extends BaseController
 				return $this->sendError('engmtpers non trouve.');
 			}
 
-			return $engmtpers;			
+			return $engmtpers;
 		}
 
 		/**

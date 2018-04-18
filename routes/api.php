@@ -47,13 +47,13 @@ Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refreshT
  });
 
 
- Route::group(['middleware' => 'jwt.auth'], function(){
+// Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('engmts', 'EngmtController');
- });
+ //});
 
- Route::group(['middleware' => 'jwt.auth'], function(){
+ //Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('engmtpers', 'EngmtpersController');
- });
+// });
 
  // Route::group(['middleware' => 'jwt.auth'], function(){
  //   Route::resource('events', 'EventController');
