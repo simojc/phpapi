@@ -19,7 +19,7 @@ class TontpersController extends BaseController
 		 */
 		public function index()
 		 {
-  	 		$tontperss = Tontpers::all();
+  	 	$tontperss = Tontpers::all();
 			return $tontperss;
 			//$this->sendResponse($tontperss->toArray(), 'Tontperss extraits avec succes.');
 		}
@@ -32,9 +32,9 @@ class TontpersController extends BaseController
 		 */
 		public function store(Request $request)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 			$input = $request->all();
 
 			$validator = Validator::make($input, [
@@ -53,7 +53,8 @@ class TontpersController extends BaseController
 
 			$tontpers = Tontpers::create($input);
 
-			return $this->sendResponse($tontpers->toArray(), 'Tontpers cree avec succes.');
+			return $tontpers;
+			// $this->sendResponse($tontpers->toArray(), 'Tontpers cree avec succes.');
 		}
 
 		/**
@@ -64,8 +65,8 @@ class TontpersController extends BaseController
 		 */
 		public function show($id)
 		{
-			$tontpers = DB::select("			
-				SELECT 	tontpers.*			
+			$tontpers = DB::select("
+				SELECT 	tontpers.*,
 						tonts.nom,
 						tonts.descr,
 						tonts.mtpart,
@@ -73,14 +74,15 @@ class TontpersController extends BaseController
 						tonts.dtdeb,
 						tonts.dtfin,
 						tonts.cot_dern	,
-						CONCAT(pers.nom , ' ', pers.prenom) nom_prenom				
+						CONCAT(pers.nom , ' ', pers.prenom) nom_prenom
 			FROM	tontpers
-			LETF JOIN tonts ON tonts.id = tontpers.tont_id
+			LEFT JOIN tonts ON tonts.id = tontpers.tont_id
+			LEFT JOIN pers ON pers.id = tontpers.pers_id
 			WHERE tontpers.pers_id = $id ");
-			
+
 			//and tonts.groupe_id = $groupe_id
-	
-			$tontpers1 = tontpers::where( 'repdt_id', $id )->all();
+
+		//	$tontpers1 = tontpers::where( 'repdt_id', $id )->all();
 		// 	$tontpers = Tontpers::find($id);
 			if (is_null($tontpers)) {
 				return $this->sendError('tontpers non trouve.');
@@ -100,9 +102,9 @@ class TontpersController extends BaseController
 		//public function update(Request $request, $id)
 		public function update(Request $request, Tontpers $tontpers)
 		{
-			 if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			   }
+			 // if (! $user = JWTAuth::parseToken()->authenticate()) {
+				//    return response()->json(['msg' => 'User not found'], 404);
+			 //   }
 
 			$input = $request->all();
 
@@ -141,12 +143,12 @@ class TontpersController extends BaseController
 		 */
 		public function destroy(Tontpers $tontpers)
 		{
-			if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			}
-
+			// if (! $user = JWTAuth::parseToken()->authenticate()) {
+			// 	   return response()->json(['msg' => 'User not found'], 404);
+			// }
 			$tontpers->delete();
 
-			return $this->sendResponse($tontpers->toArray(), 'Tontpers supprime avec succes.');
+			return $tontpers;
+			// $this->sendResponse($tontpers->toArray(), 'Tontpers supprime avec succes.');
 		}
 }

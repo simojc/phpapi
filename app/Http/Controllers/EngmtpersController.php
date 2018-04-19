@@ -78,8 +78,8 @@ class EngmtpersController extends BaseController
 							engmts.dt_ech,
 							CONCAT(pers.nom , ' ', pers.prenom) nom_prenom
 					FROM	engmtpers
-					LETF JOIN engmts ON engmts.id = engmtpers.engmt_id
-					LEFT JOIN pers  ON pers.id = engmtpers.pers_id
+					LEFT JOIN engmts ON engmtpers.engmt_id = engmts.id
+					LEFT JOIN pers  ON engmtpers.pers_id = pers.id
 					WHERE engmtpers.pers_id = $id ");
 
 			//and engmts.groupe_id = $groupe_id

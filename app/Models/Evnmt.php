@@ -11,20 +11,20 @@ class Evnmt extends Model
     'date',
     'hrdeb',
     'hrfin',
-    'statut',    
-    'descr',  
+    'statut',
+    'descr',
 	'rapport',
 	'resp1',
 	'resp2',
 	'resp3',
 	'affich',
-	]
-	
-		public function groupe() 
+];
+
+		public function groupe()
 		{
-			// return $this->belongsTo('App\Models\Groupe’); 
-			  return $this->belongsTo(Groupe::class); 
-		};
+			// return $this->belongsTo('App\Models\Groupeï¿½);
+			  return $this->belongsTo(Groupe::class);
+		}
 
 		public function location()
 		{
@@ -33,10 +33,10 @@ class Evnmt extends Model
 
 		/*
 		public function evnmtdtl()
- 		{ 
-			return $this->hasMany('App\Models\Evnmtdtl'); 
+ 		{
+			return $this->hasMany('App\Models\Evnmtdtl');
 		}
 		*/
 
-		
+
 }

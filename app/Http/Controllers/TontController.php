@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
 use App\Tont;
@@ -52,7 +52,8 @@ class TontController extends BaseController
 
 			$tont = Tont::create($input);
 
-			return $this->sendResponse($tont->toArray(), 'Tont cree avec succes.');
+			return $tont;
+			// $this->sendResponse($tont->toArray(), 'Tont cree avec succes.');
 		}
 
 		/**
@@ -63,9 +64,9 @@ class TontController extends BaseController
 		 */
 		public function show($id)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
+		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
+			 //   return response()->json(['msg' => 'User not found'], 404);
+		   // }
 
 			$tont = Tont::find($id);
 
@@ -73,7 +74,8 @@ class TontController extends BaseController
 				return $this->sendError('tont non trouve.');
 			}
 
-			return $this->sendResponse($tont->toArray(), 'tont recuper avec succes .');
+			return $tont;
+			//$this->sendResponse($tont->toArray(), 'tont recuper avec succes .');
 		}
 
 		/**
@@ -86,9 +88,9 @@ class TontController extends BaseController
 		//public function update(Request $request, $id)
 		 public function update(Request $request, Tont $tont)
 		{
-			 if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			   }
+			 // if (! $user = JWTAuth::parseToken()->authenticate()) {
+				//    return response()->json(['msg' => 'User not found'], 404);
+			 //   }
 
 			$input = $request->all();
 

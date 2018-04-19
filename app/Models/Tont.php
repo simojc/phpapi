@@ -11,18 +11,18 @@ class Tont extends Model
 			'descr',
 			'mtpart',
 			'dtdeb',
-			'dtfin',    
+			'dtfin',
 			'cot_dern',
-			]
-	
-	public function groupe() 
+    ];
+
+	public function groupe()
 	{
-		// return $this->belongsTo('App\Models\Groupe’); 
-			return $this->belongsTo(Groupe::class); 
+		// return $this->belongsTo('App\Models\Groupeï¿½);
+			return $this->belongsTo(Groupe::class);
 	}
 
 	public function tontpers()
- 	{ 
-		return $this->hasMany('App\Models\Tontpers'); 
+ 	{
+		return $this->hasMany('App\Models\Tontpers');
 	}
 }

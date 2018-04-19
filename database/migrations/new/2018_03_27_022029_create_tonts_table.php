@@ -17,7 +17,7 @@ class CreateTontsTable extends Migration
             $table->increments('id');
 
 			$table->unsignedInteger('groupe_id');
-			$table->integer('nom');
+			$table->string('nom');
 			$table->string('descr');
 			$table->integer('mtpart');
 			$table->dateTime('dtdeb');

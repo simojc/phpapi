@@ -89,10 +89,10 @@ Route::middleware('jwt.refresh')->get('/token/refresh', 'AuthController@refreshT
    Route::resource('sessions', 'SessionController');
  });
 
- Route::group(['middleware' => 'jwt.auth'], function(){
+ //Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('tonts', 'TontController');
- });
+ //});
 
- Route::group(['middleware' => 'jwt.auth'], function(){
+ //Route::group(['middleware' => 'jwt.auth'], function(){
    Route::resource('tontpers', 'TontpersController');
- });
+ //});

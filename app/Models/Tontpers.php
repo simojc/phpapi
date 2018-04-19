@@ -8,21 +8,21 @@ class Tontpers extends Model
 {
 		protected $fillable = [
 			'position',
-			'alias',   	// Pour gérer les cas des personnes qui auront plus d'un nom inscrit	
+			'alias',   	// Pour gï¿½rer les cas des personnes qui auront plus d'un nom inscrit
 			'statut',
 			'dt_statut',
-			'moisgain '
+			'moisgain'
 		];
-	
-		public function tont() 
-		{
-			// return $this->belongsTo('App\Models\Engmt’); 
-			  return $this->belongsTo(Tont::class); 
-		};
 
-		public function pers() 
+		public function tont()
 		{
-			// return $this->belongsTo('App\Models\Pers’); 
-			  return $this->belongsTo(Pers::class); 
-		};
+			// return $this->belongsTo('App\Models\Engmtï¿½);
+			  return $this->belongsTo(Tont::class);
+		}
+
+		public function pers()
+		{
+			// return $this->belongsTo('App\Models\Persï¿½);
+			  return $this->belongsTo(Pers::class);
+		}
 }
