@@ -36,9 +36,6 @@ class RpnpersController extends BaseController
 		 */
 		public function store(Request $request)
 		{
-		   if (! $user = JWTAuth::parseToken()->authenticate()) {
-			   return response()->json(['msg' => 'User not found'], 404);
-		   }
 			$input = $request->all();
 
 			$validator = Validator::make($input, [
@@ -57,7 +54,8 @@ class RpnpersController extends BaseController
 
 			$rpnpers = Rpnpers::create($input);
 
-			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers cree avec succes.');
+			return $rpnpers ;
+			//$this->sendResponse($rpnpers->toArray(), 'Rpnpers cree avec succes.');
 		}
 
 		/**
@@ -73,14 +71,13 @@ class RpnpersController extends BaseController
 					SELECT
 						rpnpers.*, CONCAT(personne.nom , ' ', personne.prenom) nom_pers,
 						personne.prenom prenom_pers,
-						CONCAT(repdt.nom , ' ', repdt.prenom) nom_repdt, repdt.prenom prenom_repdt
+						CONCAT(repdt.nom , ' ', repdt.prenom) nom_repdt, repdt.prenom prenom_repdt,
+  				CASE (rpnpers.depot - 10)<0
+   						when true then 'Dépôt à compléter le plus tôt possible' END as  message
 					FROM rpnpers
 					LEFT JOIN pers as personne ON personne.id = rpnpers.pers_id
 					LEFT JOIN pers as repdt ON repdt.id = rpnpers.repdt_id
 					WHERE rpnpers.repdt_id = $id");
-
-			//$rpnpers1 = rpnpers::where( 'repdt_id', $id )->get();
-		// 	$tontpers = Tontpers::find($id);
 
 			if (is_null($rpnpers)) {
 				return $this->sendError('rpnpers non trouve.');

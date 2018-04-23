@@ -8,14 +8,15 @@ class Evnmtdtl extends Model
 {
       protected $fillable = [
        'evnmt_id',
+        'ordre',
        'title',
        'resp',
        'resume',
        'contenu',
-       'duree',
+       'duree'      
        ];
 
-    public voters: string[]
+  //  public voters: string[]
 
     public function evnmt()
     {

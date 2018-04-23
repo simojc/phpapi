@@ -141,11 +141,7 @@ class EvnmtController extends BaseController
 		 * @return \Illuminate\Http\Response
 		 */
 		public function destroy(Evnmt $evnmt)
-		{
-			// if (! $user = JWTAuth::parseToken()->authenticate()) {
-			// 	   return response()->json(['msg' => 'User not found'], 404);
-			// }
-
+		{		
 			$evnmt->delete();
 
 			return $this->sendResponse($evnmt->toArray(), 'Evnmt supprime avec succes.');

@@ -17,6 +17,7 @@ class CreateEvnmtdtlsTable extends Migration
             $table->increments('id');
 
           	$table->integer('evnmt_id');
+            $table->integer('ordre');
           	$table->string('resp'); 		//Responsable de l''activité
           	$table->string('resume');
             $table->string('title');

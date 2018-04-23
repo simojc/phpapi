@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController as BaseController;
@@ -16,15 +17,29 @@ class EvnmtdtlController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
-    {
-   //  if (! $user = JWTAuth::parseToken()->authenticate()) {
-    //  return response()->json(['msg' => 'User not found'], 404);
-   // }
-    $evnmtdtls = Evnmtdtl::all();
-    return $evnmtdtls;
+  public function index(Request $request)
+   {
+    $input = $request->all();
+     $evnmt_id = $input['evnmt_id'];
 
-    // return $this->sendResponse($evnmts->toArray(), 'evnmts extraits avec succes.');
+    if (!is_null($evnmt_id)) {
+      //  $evnmtdtls = Evnmtdtl::where('evnmt_id', $evnmt_id)->get();
+        $evnmtdtls = DB::select("
+          SELECT 	evnmtdtls.*,
+              CONCAT('Point ',evnmtdtls.ordre , ': ', evnmtdtls.title) entete
+        FROM	evnmtdtls
+        WHERE evnmtdtls.evnmt_id = $evnmt_id ");
+      }
+
+    else {
+        $evnmtdtls = Evnmtdtl::all();
+      }
+
+      if (is_null($evnmtdtls)) {
+        return $this->sendError('evnmtdtls non trouve.');
+      }
+
+      return  $evnmtdtls;
   }
 
   /**
@@ -35,14 +50,12 @@ class EvnmtdtlController extends Controller
    */
   public function store(Request $request)
   {
-     // if (! $user = JWTAuth::parseToken()->authenticate()) {
-     //   return response()->json(['msg' => 'User not found'], 404);
-     // }
     $input = $request->all();
 
     $validator = Validator::make($input, [
       'evnmt_id'=> 'required',
       'title'=> 'required',
+      'ordre'=> 'required',
       'resume'=> 'required'
     ]);
 
@@ -51,9 +64,7 @@ class EvnmtdtlController extends Controller
     }
 
     $evnmtdtl = Evnmtdtl::create($input);
-    return = $evnmtdtl;
-
-    // return $this->sendResponse($evnmts->toArray(), 'Evnmts cree avec succes.');
+    return $evnmtdtl;
   }
 
   /**
@@ -64,17 +75,12 @@ class EvnmtdtlController extends Controller
    */
   public function show($id)
   {
-     // if (! $user = JWTAuth::parseToken()->authenticate()) {
-     //   return response()->json(['msg' => 'User not found'], 404);
-     // }
-
     $evnmtdtl = Evnmtdtl::find($id);
 
     if (is_null($evnmtdtl)) {
       return $this->sendError('detail non trouve.');
     }
     return $evnmtdtl;
-    // return $this->sendResponse($evnmts->toArray(), 'evnmts recuper avec succes .');
   }
 
   /**
@@ -87,35 +93,29 @@ class EvnmtdtlController extends Controller
   //public function update(Request $request, $id)
    public function update(Request $request, Evnmtdtl $evnmtdtl)
   {
-     // if (! $user = JWTAuth::parseToken()->authenticate()) {
-      //    return response()->json(['msg' => 'User not found'], 404);
-     //   }
-
     $input = $request->all();
 
     $validator = Validator::make($input, [
       'evnmt_id'=> 'required',
       'title'=> 'required',
+      'ordre'=> 'required',
       'resume'=> 'required'
     ]);
 
-    if($validator->fails()){
-      return $this->sendError('Validation Error.', $validator->errors());
-    }
+      if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors());
+      }
 
       $evnmtdtl->evnmt_id = $input['evnmt_id'];
       $evnmtdtl->resume = $input['resume'];
       $evnmtdtl->title = $input['title'];
-
       $evnmtdtl->resp = $input['resp'];
       $evnmtdtl->contenu = $input['contenu'];
       $evnmtdtl->duree = $input['duree'];
-
+      $evnmtdtl->ordre = $input['ordre'];
       $evnmtdtl->save();
 
       return $evnmtdtl;
-
-    // return $this->sendResponse($evnmts->toArray(), 'Evnmts mis a jour avec succes.');
   }
 
   /**
@@ -126,12 +126,9 @@ class EvnmtdtlController extends Controller
    */
   public function destroy(Evnmtdtl $evnmtdtl)
   {
-    // if (! $user = JWTAuth::parseToken()->authenticate()) {
-    // 	   return response()->json(['msg' => 'User not found'], 404);
-    // }
-
     $evnmtdtl->delete();
 
     return $this->sendResponse($evnmtdtl->toArray(), 'detail supprime avec succes.');
   }
+
 }
