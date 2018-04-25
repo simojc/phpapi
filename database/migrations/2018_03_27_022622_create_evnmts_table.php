@@ -24,7 +24,11 @@ class CreateEvnmtsTable extends Migration
   			$table->string('statut');
   			$table->string('descr');			// (longue description , famille acueil, tout autres info pertinantes)
   			$table->text('contenu');
-  			$table->unsignedInteger('location_id'); 				  /// Adresse du groupe	  FK vers location
+  			
+			$table->string('address');
+			$table->string('city');
+			$table->string('country');
+			
   			$table->string('rapport');			//(nom du fichier ....rapport)
   			$table->string('famaccueil')->nullable();	;			//(pers_id)
   			$table->integer('resp1')->nullable();	;		 	//(pers_id)
@@ -38,10 +42,10 @@ class CreateEvnmtsTable extends Migration
 			  ->references('id')->on('groupes')
 			  ->onDelete('cascade');
 
-			$table->foreign('location_id')
-				->references('id')->on('locations')
-				->onDelete('cascade');
-	//voteurs: users []
+			// $table->foreign('location_id')
+			// ->references('id')->on('locations')
+			// ->onDelete('cascade');
+	
 
             $table->timestamps();
         });

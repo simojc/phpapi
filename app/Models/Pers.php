@@ -17,6 +17,9 @@ class Pers extends Model
 				'emploi',
 				'dom_activ',
 				'titre_adh',
+				'address',
+    			'city',
+    			'country',
       ];
 
 
@@ -25,10 +28,10 @@ class Pers extends Model
 			return $this->hasMany('App\Models\Engmtpers');
 		}
 
-		public function location()
-		{
-		return $this->belongsTo('App\Models\Location');
-		}
+		// public function location()
+		// {
+		// return $this->belongsTo('App\Models\Location');
+		// }
 
 		public function tontpers()
  		{

@@ -34,9 +34,8 @@ class PersController extends BaseController
 					$perss = DB::select("
 					SELECT
 						pers.*, CONCAT(pers.nom , ' ', pers.prenom) nom_pers,
-						CONCAT(locations.address , ' ',	locations.city, ' ',locations.country) location
-					FROM pers
-					LEFT JOIN locations ON locations.id = pers.location_id
+						CONCAT(pers.address , ' ',	pers.city, ' ',pers.country) location
+					FROM pers					
 					WHERE UPPER(substr(pers.type,1,1)) = $type and pers.groupe_id = $groupe");
 				}
 
@@ -64,7 +63,9 @@ class PersController extends BaseController
 				'sexe'=> 'required',
 				'email'=> 'required',
 				'telcel'=> 'required',
-				'location_id'=> 'required',
+				'address'=> 'required',
+				'city'=> 'required',
+				'country'=> 'required',				
 				'type'=> 'required',
 				'prenom'=> 'required'
 			]);
@@ -111,13 +112,15 @@ class PersController extends BaseController
 		public function update(Request $request, $id)
 		{
 			$input = $request->all();
-			$validator = Validator::make($input, [
+		$validator = Validator::make($input, [
 				'type'=> 'required',
 				'prenom'=> 'required',
 				'sexe'=> 'required',
 				'email'=> 'required',
 				'telcel'=> 'required',
-				'location_id'=> 'required',
+				'address'=> 'required',
+				'city'=> 'required',
+				'country'=> 'required',				
 				'type'=> 'required',
 				'prenom'=> 'required'
 			]);
@@ -129,16 +132,7 @@ class PersController extends BaseController
 			$pers = Pers::findOrFail($id);
 			$pers->fill($request->all());
 
-			// $pers->type = $input['type'];
-			// $pers->nom = $input['nom'];
-			// $pers->prenom = $input['prenom'];
-			// $pers->sexe = $input['sexe'];
-			// $pers->email = $input['email'];
-			// $pers->telcel = $input['telcel'];
-			// $pers->telres = $input['telres'];
-			// $pers->location_id = $input['location_id'];
-			// $pers->emploi = $input['emploi'];
-			// $pers->titre_adh = $input['titre_adh'];
+
 
 			$pers->save();
 
