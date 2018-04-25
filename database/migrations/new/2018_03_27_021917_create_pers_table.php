@@ -27,7 +27,7 @@ class CreatePersTable extends Migration
 			$table->string('emploi');
 			$table->string('dom_activ')->nullable();	 	//	(domaine d'activite de la personne)
 			$table->string('titre_adh')->nullable();	 	// 	(Le titre d'adhesion ou responsabilite au sein du groupe: membre regulier, president, secretaire, commissaire aucompte etc...)
-			
+
 			$table->unsignedInteger('groupe_id')->nullable(false);
 			  // definition des contraintes
 			  $table->foreign('groupe_id')
@@ -36,7 +36,7 @@ class CreatePersTable extends Migration
 
 			//$table->primary('id');
 			$table->string('email')->unique();
-			
+
 			$table->foreign('location_id')
 				->references('id')->on('locations')
 				->onDelete('cascade');
