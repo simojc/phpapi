@@ -47,7 +47,9 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 			'date'=> 'required',
 			'time'=> 'required',
 			'price'=> 'required',
-			'location_id'=> 'required'
+				'address'=> 'required',
+				'city'=> 'required',
+				'country'=> 'required',			
 		]);
 
 			if($validator->fails()){
@@ -95,13 +97,15 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 			$input = $request->all();
 
-			  $validator = Validator::make($input, [
-				'name'=> 'required',
-				'date'=> 'required',
-				'time'=> 'required',
-				'price'=> 'required',
-				'location_id'=> 'required'
-			]);
+				$validator = Validator::make($input, [
+			'name'=> 'required',
+			'date'=> 'required',
+			'time'=> 'required',
+			'price'=> 'required',
+				'address'=> 'required',
+				'city'=> 'required',
+				'country'=> 'required',			
+		]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
@@ -111,7 +115,11 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 				$event->date = $input['date'];
 				$event->time = $input['time'];
 				$event->price = $input['price'];
-				$event->location_id = $input['location_id'];
+				
+				$event->address = $input['address'];
+				$event->city = $input['city'];
+				$event->country = $input['country'];
+				
 				$event->imageUrl = $input['imageUrl'];
 				$event->onlineUrl = $input['onlineUrl'];
 

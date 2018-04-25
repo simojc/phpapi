@@ -128,7 +128,9 @@ class GroupeController extends BaseController
 				$groupe->cfinexo = $input['cfinexo'];
 
 				$groupe->contact = $input['contact'];
-				$groupe->location_id = $input['location_id'];
+				$groupe->address = $input['address'];
+				$groupe->city = $input['city'];
+				$groupe->country = $input['country'];
 				$groupe->tel = $input['tel'];
 
 

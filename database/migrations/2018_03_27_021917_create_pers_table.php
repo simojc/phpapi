@@ -20,11 +20,11 @@ class CreatePersTable extends Migration
 			$table->string('nom')->nullable(false);
 			$table->string('prenom')->nullable(false);
 			$table->string('sexe')->nullable(false);
-			$table->string('email')->nullable(false);
+			$table->string('email')->nullable(false)->unique();
 			$table->string('telcel')->nullable(false);
 			$table->string('telres');
 			// $table->unsignedInteger('location_id'); 				  /// Adresse du groupe	  FK vers location
-			
+
 			$table->string('address');
 			$table->string('city');
 			$table->string('country');
@@ -39,14 +39,7 @@ class CreatePersTable extends Migration
 			  ->references('id')->on('groupes')
 			  ->onDelete('cascade');
 
-			//$table->primary('id');
-			$table->string('email')->unique();
-
-			// $table->foreign('location_id')
-				// ->references('id')->on('locations')
-				// ->onDelete('cascade');
-
-            $table->timestamps();
+      $table->timestamps();
         });
     }
 

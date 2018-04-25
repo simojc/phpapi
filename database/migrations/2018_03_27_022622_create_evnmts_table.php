@@ -34,14 +34,9 @@ class CreateEvnmtsTable extends Migration
 				//Contraintes
 			//$table->primary('id');
 
-			$table->foreign('groupe_id')
+			 $table->foreign('groupe_id')
 			  ->references('id')->on('groupes')
 			  ->onDelete('cascade');
-
-			$table->foreign('location_id')
-				->references('id')->on('locations')
-				->onDelete('cascade');
-	//voteurs: users []
 
             $table->timestamps();
         });

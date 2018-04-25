@@ -23,16 +23,21 @@ class CreateGroupesTable extends Migration
       $table->dateTime('dbexo');
       $table->dateTime('cfinexo');
       $table->string('contact')->nullable(false);				         // (Le repondant est une personne du groupe de type membre): Nom & prenom & tel & couriel du repondant
-      $table->unsignedInteger('location_id')->nullable(false); 				  /// Adresse du groupe	  FK vers location
+     // $table->unsignedInteger('location_id')->nullable(false); 				  /// Adresse du groupe	  FK vers location
+	 
+	 	$table->string('address');
+		$table->string('city');
+		$table->string('country');
+			
       $table->string('tel')->nullable(false);
 
       $table->timestamps();
 
       $table->unique('mtle_reg');
       $table->unique('nom');
-      $table->foreign('location_id')
-      ->references('id')->on('locations')
-      ->onDelete('cascade');
+      // $table->foreign('location_id')
+      // ->references('id')->on('locations')
+      // ->onDelete('cascade');
 
     });
   }

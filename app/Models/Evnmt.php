@@ -18,6 +18,9 @@ class Evnmt extends Model
 	'resp2',
 	'resp3',
 	'affich',
+	'address',
+    'city',
+    'country',
 ];
 
 		public function groupe()
@@ -26,10 +29,10 @@ class Evnmt extends Model
 			  return $this->belongsTo(Groupe::class);
 		}
 
-		public function location()
-		{
-		return $this->belongsTo('App\Models\Location');
-		}
+		// public function location()
+		// {
+		// return $this->belongsTo('App\Models\Location');
+		// }
 
 		/*
 		public function evnmtdtl()

@@ -16,6 +16,9 @@ class Groupe extends Model
 							'cfinexo',
 							'contact',
 							'tel',
+							'address',
+							'city',
+							'country',
 					];
 
 		public function evnmts()
@@ -47,9 +50,9 @@ class Groupe extends Model
 			return $this->hasMany('App\Models\Engmt');
 		}
 
-		public function location()
-		{
-			return $this->belongsTo('App\Models\Location');
-		}
+		// public function location()
+		// {
+			// return $this->belongsTo('App\Models\Location');
+		// }
 
 }

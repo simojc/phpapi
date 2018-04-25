@@ -47,7 +47,9 @@ class EvnmtController extends BaseController
 				'date'=> 'required',
 				'statut'=> 'required',
 				'hrdeb'=> 'required',
-				'location_id'=> 'required',
+				'address'=> 'required',
+				'city'=> 'required',
+				'country'=> 'required',	
 			]);
 
 			if($validator->fails()){
@@ -104,7 +106,9 @@ class EvnmtController extends BaseController
 				'date'=> 'required',
 				'statut'=> 'required',
 				'hrdeb'=> 'required',
-				'location_id'=> 'required',
+				'address'=> 'required',
+				'city'=> 'required',
+				'country'=> 'required',	
 			]);
 
 			if($validator->fails()){
@@ -117,9 +121,12 @@ class EvnmtController extends BaseController
 				$evnmt->hrfin = $input['hrfin'];
 				$evnmt->statut = $input['statut'];
 				$evnmt->descr = $input['descr'];
-				$evnmt->contenu = $input['contenu'];
-
-				$evnmt->location_id = $input['location_id'];
+				$evnmt->contenu = $input['contenu'];				
+				
+				$evnmt->address = $input['address'];
+				$evnmt->city = $input['city'];
+				$evnmt->country = $input['country'];
+				
 				$evnmt->rapport = $input['rapport'];
 				$evnmt->resp1 = $input['resp1'];
 				$evnmt->resp2 = $input['resp2'];

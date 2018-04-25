@@ -20,13 +20,18 @@ class CreateEventsTable extends Migration
 			$table->string('time');
 			$table->decimal('price');
 			$table->string('imageUrl');
-			$table->unsignedInteger('location_id');
+			// $table->unsignedInteger('location_id');
+			
+			$table->string('address');
+			$table->string('city');
+			$table->string('country');
+		
 			$table->string('onlineUrl');
-
+					
 			//$table->primary('id');
-			$table->foreign('location_id')
-				->references('id')->on('locations')
-				->onDelete('cascade');
+			// $table->foreign('location_id')
+				// ->references('id')->on('locations')
+				// ->onDelete('cascade');
 
             $table->timestamps();
         });

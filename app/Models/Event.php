@@ -12,7 +12,9 @@ class Event extends Model
 			'date',
 			'time',
 			'price',
-			'location_id',
+			'address',
+    			'city',
+    			'country',
 			'imageUrl',
 			'onlineUrl',
 	];
@@ -22,10 +24,10 @@ class Event extends Model
 		return $this->hasMany('App\Models\Session');
 	}
 
-	public function location()
-	{
-	return $this->belongsTo('App\Models\Location');
-	}
+	// public function location()
+	// {
+	// return $this->belongsTo('App\Models\Location');
+	// }
 
 
 }
