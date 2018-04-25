@@ -19,13 +19,8 @@ class RpnpersController extends BaseController
 		 */
 		public function index()
 		 {
-		 //  if (! $user = JWTAuth::parseToken()->authenticate()) {
-			//  return response()->json(['msg' => 'User not found'], 404);
-		 // }
 			$rpnperss = Rpnpers::all();
-
 			return 	$rpnperss;
-			// $this->sendResponse($rpnperss->toArray(), 'Rpnpersonnes extraites avec succes.');
 		}
 
 		/**
@@ -37,23 +32,18 @@ class RpnpersController extends BaseController
 		public function store(Request $request)
 		{
 			$input = $request->all();
-
 			$validator = Validator::make($input, [
 				'groupe_id'=> 'required',
 				'pers_id'=> 'required',
-				'repdt_id'=> 'required',
+				'repdt1_id'=> 'required',
 				'dtadh'=> 'required',
-				'mtrle'=> 'required',
-				'depot'=> 'required',
-				'dtmajdpt'=> 'required'
-			]);
+				'mtrle'=> 'required'
+				]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
-
 			$rpnpers = Rpnpers::create($input);
-
 			return $rpnpers ;
 			//$this->sendResponse($rpnpers->toArray(), 'Rpnpers cree avec succes.');
 		}
@@ -64,7 +54,7 @@ class RpnpersController extends BaseController
 		 * @param  int  $id
 		 * @return \Illuminate\Http\Response
 		 */
-		public function show($id)
+		 public function show($id)
 		{
 
 			$rpnpers = DB::select("
@@ -76,8 +66,8 @@ class RpnpersController extends BaseController
    						when true then 'Dépôt à compléter le plus tôt possible' END as  message
 					FROM rpnpers
 					LEFT JOIN pers as personne ON personne.id = rpnpers.pers_id
-					LEFT JOIN pers as repdt ON repdt.id = rpnpers.repdt_id
-					WHERE rpnpers.repdt_id = $id");
+					LEFT JOIN pers as repdt ON repdt.id = rpnpers.repdt1_id
+					WHERE rpnpers.repdt1_id = $id");
 
 			if (is_null($rpnpers)) {
 				return $this->sendError('rpnpers non trouve.');
@@ -94,40 +84,29 @@ class RpnpersController extends BaseController
 		 * @param  int  $id
 		 * @return \Illuminate\Http\Response
 		 */
-		//public function update(Request $request, $id)
-		 public function update(Request $request, Rpnpers $rpnpers)
+		public function update(Request $request, $id)
+		// public function update(Request $request, Rpnpers $rpnpers)
 		{
-			 if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			   }
-
 			$input = $request->all();
 
-				$validator = Validator::make($input, [
+			$validator = Validator::make($input, [
 				'groupe_id'=> 'required',
 				'pers_id'=> 'required',
-				'repdt_id'=> 'required',
+				'repdt1_id'=> 'required',
 				'dtadh'=> 'required',
-				'mtrle'=> 'required',
-				'depot'=> 'required',
-				'dtmajdpt'=> 'required'
-			]);
+				'mtrle'=> 'required'
+				]);
 
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-			$rpnpers->groupe_id = $input['groupe_id'];
-			$rpnpers->pers_id = $input['pers_id'];
-			$rpnpers->repdt_id = $input['repdt_id'];
-			$rpnpers->dtadh = $input['dtadh'];
-			$rpnpers->mtrle = $input['mtrle'];
-			$rpnpers->depot = $input['depot'];
-			$rpnpers->dtmajdpt = $input['dtmajdpt'];
+			$rpnpers = Pers::findOrFail($id);
+			$rpnpers->fill($request->all());
 
 			$rpnpers->save();
 
-			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers mis a jour avec succes.');
+			return $rpnpers ;
 		}
 
 		/**
@@ -138,10 +117,6 @@ class RpnpersController extends BaseController
 		 */
 		public function destroy(Rpnpers $rpnpers)
 		{
-			if (! $user = JWTAuth::parseToken()->authenticate()) {
-				   return response()->json(['msg' => 'User not found'], 404);
-			}
-
 			$rpnpers->delete();
 
 			return $this->sendResponse($rpnpers->toArray(), 'Rpnpers supprimee avec succes.');

@@ -16,7 +16,6 @@ class CreatePersTable extends Migration
         Schema::create('pers', function (Blueprint $table) {
             $table->increments('id');
 
-			$table->unsignedInteger('user_id')->nullable(false); 		//  (Une personne est rattace e un utilisateur existant, ce qui fait aussi le lien avec le groupe)
 			$table->string('type')->nullable(false);				// (membre,fils/fille du membre, conjoint/conjointe du membre,  cousin/cousine du membre, niece/neuveu du membre, frere / soeur du membre, ami/amie du membre, autre lien du membre)
 			$table->string('nom')->nullable(false);
 			$table->string('prenom')->nullable(false);
@@ -28,12 +27,16 @@ class CreatePersTable extends Migration
 			$table->string('emploi');
 			$table->string('dom_activ')->nullable();	 	//	(domaine d'activite de la personne)
 			$table->string('titre_adh')->nullable();	 	// 	(Le titre d'adhesion ou responsabilite au sein du groupe: membre regulier, president, secretaire, commissaire aucompte etc...)
-
-			// contraintes PK et FK
-			//$table->primary('id');
-			$table->foreign('user_id')
-			  ->references('id')->on('users')
+			
+			$table->unsignedInteger('groupe_id')->nullable(false);
+			  // definition des contraintes
+			  $table->foreign('groupe_id')
+			  ->references('id')->on('groupes')
 			  ->onDelete('cascade');
+
+			//$table->primary('id');
+			$table->string('email')->unique();
+			
 			$table->foreign('location_id')
 				->references('id')->on('locations')
 				->onDelete('cascade');

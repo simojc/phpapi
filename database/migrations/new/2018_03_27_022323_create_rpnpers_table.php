@@ -18,7 +18,8 @@ class CreateRpnpersTable extends Migration
 
       $table->unsignedInteger('groupe_id');
       $table->unsignedInteger('pers_id');		  //(fk vers table personne, la personne inscrite)
-      $table->unsignedInteger('repdt_id');		// (fk vers table personne, le repondant doit etre une personne de type membre)
+      $table->unsignedInteger('repdt1_id');		// (fk vers table personne, le repondant doit etre une personne de type membre)
+	  $table->unsignedInteger('repdt2_id');		// (fk vers table personne, le repondant doit etre une personne de type membre)
       $table->dateTime('dtadh');		//   (date d'adhesion)
       $table->string('mtrle');		//  (matricule rpn)
       $table->integer('depot');
@@ -30,6 +31,12 @@ class CreateRpnpersTable extends Migration
       ->references('id')->on('groupes')
       ->onDelete('cascade');
       $table->foreign('pers_id')
+      ->references('id')->on('pers')
+      ->onDelete('cascade');
+	     $table->foreign('repdt1_id')
+      ->references('id')->on('pers')
+      ->onDelete('cascade');
+	     $table->foreign('repdt2_id')
       ->references('id')->on('pers')
       ->onDelete('cascade');
 

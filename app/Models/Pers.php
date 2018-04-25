@@ -30,11 +30,6 @@ class Pers extends Model
 		return $this->belongsTo('App\Models\Location');
 		}
 
-		public function user()
-		{
-		return $this->belongsTo('App\Models\User');
-		}
-
 		public function tontpers()
  		{
 			return $this->hasMany('App\Models\Tontpers');
@@ -43,6 +38,12 @@ class Pers extends Model
 		public function rpnpers()
  		{
 			return $this->hasMany('App\Models\Rpnpers');
+		}
+
+		public function groupe()
+		{
+			// return $this->belongsTo('App\Models\Groupe');
+			  return $this->belongsTo(Groupe::class);
 		}
 
 }

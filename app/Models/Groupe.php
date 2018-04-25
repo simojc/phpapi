@@ -11,36 +11,40 @@ class Groupe extends Model
 							'mtle_reg',
 							'descr',
 							'dtcre',
-							'dureexo',    
-							'dbexo',   
-							'cfinexo',  
+							'dureexo',
+							'dbexo',
+							'cfinexo',
 							'contact',
-							'tel',  
-					]
-	
+							'tel',
+					];
+
 		public function evnmts()
- 		{ 
-			return $this->hasMany('App\Models\Evnmt'); 
+ 		{
+			return $this->hasMany('App\Models\Evnmt');
 		}
 
 		public function users()
- 		{ 
-			return $this->hasMany('App\Models\User'); 
+ 		{
+			return $this->hasMany('App\Models\User');
 		}
 
 		public function tonts()
- 		{ 
-			return $this->hasMany('App\Models\Tont'); 
+ 		{
+			return $this->hasMany('App\Models\Tont');
 		}
 
 		public function rpnpers()
- 		{ 
-			return $this->hasMany('App\Models\Rpnpers'); 
+ 		{
+			return $this->hasMany('App\Models\Rpnpers');
 		}
 
+		public function pers()
+ 		{
+			return $this->hasMany('App\Models\Pers'); 		}
+
 		public function engmts()
- 		{ 
-			return $this->hasMany('App\Models\Engmt'); 
+ 		{
+			return $this->hasMany('App\Models\Engmt');
 		}
 
 		public function location()

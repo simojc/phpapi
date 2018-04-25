@@ -20,29 +20,24 @@ class PersController extends BaseController
 		public function index(Request $request)
 		 {
 
-		$type = $request->input('type', '1');
+			$type = $request->input('type', '1');
 
 			$email = $request->input('email','1');
 
-			// $input = $request->all();
+			$groupe = $request->input('groupe','1');
 
-			 //	$email = $input['email'];
-			//	if (!is_null($email)) {
 			if (($type == '1') && ($email != '1')) {
 			 		$perss = Pers::where( 'email', $email )->first();
 				}
 
-			//	if (!is_null($type)) {
-					//$perss = Pers::where( 'type', $type )->first();
-
-	    else {
+			else {
 					$perss = DB::select("
 					SELECT
 						pers.*, CONCAT(pers.nom , ' ', pers.prenom) nom_pers,
 						CONCAT(locations.address , ' ',	locations.city, ' ',locations.country) location
 					FROM pers
 					LEFT JOIN locations ON locations.id = pers.location_id
-					WHERE UPPER(substr(pers.type,1,1)) = $type");
+					WHERE UPPER(substr(pers.type,1,1)) = $type and pers.groupe_id = $groupe");
 				}
 
 				if (is_null($perss)) {
@@ -60,13 +55,10 @@ class PersController extends BaseController
 		 */
 		public function store(Request $request)
 		{
-		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 //   return response()->json(['msg' => 'User not found'], 404);
-		   // }
+
 			$input = $request->all();
 
 			$validator = Validator::make($input, [
-				'user_id'=> 'required',
 				'type'=> 'required',
 				'prenom'=> 'required',
 				'sexe'=> 'required',
@@ -95,9 +87,6 @@ class PersController extends BaseController
 		 */
 		public function show($id)
 		{
-		   // if (! $user = JWTAuth::parseToken()->authenticate()) {
-			 //   return response()->json(['msg' => 'User not found'], 404);
-		   // }
 
 			$pers = Pers::find($id);
 
@@ -109,23 +98,7 @@ class PersController extends BaseController
 			//$this->sendResponse($pers->toArray(), 'pers recuper avec succes .');
 		}
 
-		/**
-		 * Display the specified resource.
-		 *
-		 * @param  int  $mail
-		 * @return \Illuminate\Http\Response
-		 */
-		public function show2($mail)
-		{
-			$pers = Pers::where( 'email', $email )->first();
 
-			if (is_null($pers)) {
-				return $this->sendError('pers non trouve.');
-			}
-
-			return  $pers;
-			//$this->sendResponse($pers->toArray(), 'pers recuper avec succes .');
-		}
 
 		/**
 		 * Update the specified resource in storage.
@@ -134,17 +107,11 @@ class PersController extends BaseController
 		 * @param  Pers $pers
 		 * @return \Illuminate\Http\Response
 		 */
-		//public function update(Request $request, $id)
-		 public function update(Request $request, Pers $pers)
+		// public function update(Request $request, Pers $pers)
+		public function update(Request $request, $id)
 		{
-			 // if (! $user = JWTAuth::parseToken()->authenticate()) {
-				//    return response()->json(['msg' => 'User not found'], 404);
-			 //   }
-
 			$input = $request->all();
-
-				$validator = Validator::make($input, [
-				'user_id'=> 'required',
+			$validator = Validator::make($input, [
 				'type'=> 'required',
 				'prenom'=> 'required',
 				'sexe'=> 'required',
@@ -155,26 +122,28 @@ class PersController extends BaseController
 				'prenom'=> 'required'
 			]);
 
-
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
 
-				$pers->user_id = $input['user_id'];
-				$pers->type = $input['type'];
-				$pers->nom = $input['nom'];
-				$pers->prenom = $input['prenom'];
-				$pers->sexe = $input['sexe'];
-				$pers->email = $input['email'];
-				$pers->telcel = $input['telcel'];
-				$pers->telres = $input['telres'];
-				$pers->location_id = $input['location_id'];
-				$pers->emploi = $input['emploi'];
-				$pers->titre_adh = $input['titre_adh'];
+			$pers = Pers::findOrFail($id);
+			$pers->fill($request->all());
 
-				$pers->save();
+			// $pers->type = $input['type'];
+			// $pers->nom = $input['nom'];
+			// $pers->prenom = $input['prenom'];
+			// $pers->sexe = $input['sexe'];
+			// $pers->email = $input['email'];
+			// $pers->telcel = $input['telcel'];
+			// $pers->telres = $input['telres'];
+			// $pers->location_id = $input['location_id'];
+			// $pers->emploi = $input['emploi'];
+			// $pers->titre_adh = $input['titre_adh'];
 
-				return $this->sendResponse($pers->toArray(), 'Pers mis a jour avec succes.');
+			$pers->save();
+
+			return $pers ;
+			//this->sendResponse($pers->toArray(), 'Pers mis a jour avec succes.');
 		}
 
 		/**
@@ -185,12 +154,9 @@ class PersController extends BaseController
 		 */
 		public function destroy(Pers $pers)
 		{
-			// if (! $user = JWTAuth::parseToken()->authenticate()) {
-			// 	   return response()->json(['msg' => 'User not found'], 404);
-			// }
 
 			$pers->delete();
 
-			return $this->sendResponse($pers->toArray(), 'Pers supprimee avec succes.');
+			return $this->sendResponse($pers->toArray(), 'Personne supprimée avec succes.');
 		}
 }

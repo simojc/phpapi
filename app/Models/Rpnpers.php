@@ -26,10 +26,17 @@ class Rpnpers extends Model
 			  return $this->belongsTo(Pers::class);
 		}
 
-		public function repdnt()
+		public function repdnt1()
 		{
 		// return $this->belongsTo('App\User', 'foreign_key');
-			return $this->belongsTo('App\Models\Pers', 'repdt_id');
+			return $this->belongsTo('App\Models\Pers', 'repdt1_id');
+			  //return $this->belongsTo(Pers::class, 'repdt_id');
+		}
+
+			public function repdnt2()
+		{
+		// return $this->belongsTo('App\User', 'foreign_key');
+			return $this->belongsTo('App\Models\Pers', 'repdt2_id');
 			  //return $this->belongsTo(Pers::class, 'repdt_id');
 		}
 
