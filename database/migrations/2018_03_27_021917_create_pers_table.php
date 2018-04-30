@@ -25,11 +25,11 @@ class CreatePersTable extends Migration
 			$table->string('telres');
 			// $table->unsignedInteger('location_id'); 				  /// Adresse du groupe	  FK vers location
 
-			$table->string('address');
-			$table->string('city');
-			$table->string('country');
+			$table->string('address')->nullable();;
+			$table->string('city')->nullable();;
+			$table->string('country')->nullable();;
 
-			$table->string('emploi');
+			$table->string('emploi')->nullable();;
 			$table->string('dom_activ')->nullable();	 	//	(domaine d'activite de la personne)
 			$table->string('titre_adh')->nullable();	 	// 	(Le titre d'adhesion ou responsabilite au sein du groupe: membre regulier, president, secretaire, commissaire aucompte etc...)
 

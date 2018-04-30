@@ -22,6 +22,8 @@ class CreateEvnmtdtlsTable extends Migration
             $table->string('title');
           	$table->text('contenu');
           	$table->integer('duree');
+            $table->integer('ordre');
+
             	//	$table->primary('id');
 
           	$table->foreign('evnmt_id')

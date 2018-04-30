@@ -21,6 +21,7 @@ class Evnmt extends Model
 	'address',
     'city',
     'country',
+    'groupe_id'
 ];
 
 		public function groupe()

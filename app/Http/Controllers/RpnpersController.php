@@ -17,10 +17,40 @@ class RpnpersController extends BaseController
 		 *
 		 * @return \Illuminate\Http\Response
 		 */
-		public function index()
+		public function index1()
 		 {
 			$rpnperss = Rpnpers::all();
 			return 	$rpnperss;
+		}
+
+		public function index(Request $request)
+		 {
+
+			$rept_id = $request->input('$rept_id', '1');
+
+			if ($rept_id != '1')  {
+
+				$rpnpers = DB::select("
+						SELECT
+							rpnpers.*, CONCAT(personne.nom , ' ', personne.prenom) nom_pers,
+							personne.prenom prenom_pers,
+							CONCAT(repdt.nom , ' ', repdt.prenom) nom_repdt, repdt.prenom prenom_repdt,
+	  				CASE (rpnpers.depot - 10)<0
+	   						when true then 'Dépôt à compléter le plus tôt possible' END as  message
+						FROM rpnpers
+						LEFT JOIN pers as personne ON personne.id = rpnpers.pers_id
+						LEFT JOIN pers as repdt ON repdt.id = rpnpers.repdt1_id
+						WHERE rpnpers.repdt1_id = $rept_id");
+				}
+				else {
+						$rpnpers = Rpnpers::all();
+				}
+
+				if (is_null($rpnpers)) {
+					return $this->sendError('Rpnpers non trouve.');
+				}
+
+				return  $rpnpers;
 		}
 
 		/**
@@ -54,7 +84,7 @@ class RpnpersController extends BaseController
 		 * @param  int  $id
 		 * @return \Illuminate\Http\Response
 		 */
-		 public function show($id)
+		 public function show_old($id)
 		{
 
 			$rpnpers = DB::select("
@@ -67,7 +97,7 @@ class RpnpersController extends BaseController
 					FROM rpnpers
 					LEFT JOIN pers as personne ON personne.id = rpnpers.pers_id
 					LEFT JOIN pers as repdt ON repdt.id = rpnpers.repdt1_id
-					WHERE rpnpers.repdt1_id = $id");
+					WHERE rpnpers.repdt1_id = $id or rpnpers.repdt2_id = $id");
 
 			if (is_null($rpnpers)) {
 				return $this->sendError('rpnpers non trouve.');
@@ -75,6 +105,17 @@ class RpnpersController extends BaseController
 
 			return $rpnpers;
 			//$this->sendResponse($rpnpers->toArray(), 'rpnpers recuper avec succes .');
+		}
+
+		public function show($id)
+		{
+			$rpnpers = Rpnpers::find($id);
+			if (is_null($rpnpers)) {
+				return $this->sendError('pers non trouve.');
+			}
+
+			return $rpnpers;
+			//$this->sendResponse($pers->toArray(), 'pers recuper avec succes .');
 		}
 
 		/**

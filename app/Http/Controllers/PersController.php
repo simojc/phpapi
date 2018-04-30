@@ -26,16 +26,18 @@ class PersController extends BaseController
 
 			$groupe = $request->input('groupe','1');
 
-			if (($type == '1') && ($email != '1')) {
+			if (($type == '1') && ($email == '1')) {
+					$perss = Pers::all();
+				}
+			elseif (($type == '1') && ($email != '1')) {
 			 		$perss = Pers::where( 'email', $email )->first();
 				}
-
 			else {
 					$perss = DB::select("
 					SELECT
 						pers.*, CONCAT(pers.nom , ' ', pers.prenom) nom_pers,
 						CONCAT(pers.address , ' ',	pers.city, ' ',pers.country) location
-					FROM pers					
+					FROM pers
 					WHERE UPPER(substr(pers.type,1,1)) = $type and pers.groupe_id = $groupe");
 				}
 
@@ -65,9 +67,10 @@ class PersController extends BaseController
 				'telcel'=> 'required',
 				'address'=> 'required',
 				'city'=> 'required',
-				'country'=> 'required',				
+				'country'=> 'required',
 				'type'=> 'required',
-				'prenom'=> 'required'
+				'prenom'=> 'required',
+				'groupe_id'=> 'required',
 			]);
 
 			if($validator->fails()){
@@ -112,15 +115,15 @@ class PersController extends BaseController
 		public function update(Request $request, $id)
 		{
 			$input = $request->all();
-		$validator = Validator::make($input, [
+			$validator = Validator::make($input, [
 				'type'=> 'required',
-				'prenom'=> 'required',
+				'nom'=> 'required',
 				'sexe'=> 'required',
 				'email'=> 'required',
 				'telcel'=> 'required',
 				'address'=> 'required',
 				'city'=> 'required',
-				'country'=> 'required',				
+				'country'=> 'required',
 				'type'=> 'required',
 				'prenom'=> 'required'
 			]);
@@ -128,14 +131,9 @@ class PersController extends BaseController
 			if($validator->fails()){
 				return $this->sendError('Validation Error.', $validator->errors());
 			}
-
 			$pers = Pers::findOrFail($id);
 			$pers->fill($request->all());
-
-
-
 			$pers->save();
-
 			return $pers ;
 			//this->sendResponse($pers->toArray(), 'Pers mis a jour avec succes.');
 		}

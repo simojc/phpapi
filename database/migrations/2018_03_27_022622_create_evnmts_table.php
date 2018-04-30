@@ -20,16 +20,18 @@ class CreateEvnmtsTable extends Migration
   			$table->string('nom');
   			$table->dateTime('date');
   			$table->string('hrdeb');
-  			$table->string('hrfin');
+  			$table->string('hrfin')->nullable();
   			$table->string('statut');
   			$table->string('descr');			// (longue description , famille acueil, tout autres info pertinantes)
-  			$table->text('contenu');
-  			$table->unsignedInteger('location_id'); 				  /// Adresse du groupe	  FK vers location
+  			$table->text('contenu')->nullable();
+        $table->string('address')->nullable();
+        $table->string('city')->nullable();
+        $table->string('country')->nullable();
   			$table->string('rapport');			//(nom du fichier ....rapport)
-  			$table->string('famaccueil')->nullable();	;			//(pers_id)
-  			$table->integer('resp1')->nullable();	;		 	//(pers_id)
-  			$table->integer('resp2')->nullable();	;			 //(pers_id)
-  			$table->boolean('affich');		 	//(affiche cet evnmt dans la page d'acceuile? Oui/Non)
+  			$table->string('famaccueil')->nullable();				//(pers_id)
+  			$table->integer('resp1')->nullable();		 	//(pers_id)
+  			$table->integer('resp2')->nullable();				 //(pers_id)
+  			$table->boolean('affich')->default(true);;		 	//(affiche cet evnmt dans la page d'acceuile? Oui/Non)
 
 				//Contraintes
 			//$table->primary('id');

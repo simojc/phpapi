@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pers extends Model
 {
     protected $fillable = [
+      	'groupe_id',
 				'type',
 				'nom',
 				'prenom',
